@@ -3,6 +3,11 @@ console.log("Test");
 /*
 
 Modules called in index.js 
+ defaultLoading();
+ On project clicking button, 
+  function Project(title) {
+    this.title = title;
+  }
 
 At least 2 modules, todoItems/projects and DOMContent
 
