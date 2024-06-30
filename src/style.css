@@ -1,0 +1,39 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+}
+
+.projects {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    height: 100%;
+}
+
+.todos {
+    background-color: lightgray;
+    text-align: center;
+}
+
+.side-heading {
+    text-align: center;
+}
+
+.default-project {
+    width: 75%;
+    font-size: 1em;
+}
+
+button {
+    cursor: pointer;
+}

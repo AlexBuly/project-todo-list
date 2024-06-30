@@ -1,5 +1,8 @@
 console.log("Test");
 import './style.css';
+import DefaultLoading from './defaultLoading';
+
+DefaultLoading();
 
 /*
 
