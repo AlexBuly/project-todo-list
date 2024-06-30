@@ -9,6 +9,7 @@ export default function projectForm() {
 
     const form = document.createElement("form");
     const fieldset = document.createElement("fieldset");
+    const newProject = document.querySelector(".add-project");
     form.setAttribute("method", "post");
     form.setAttribute("action", "/");
     form.appendChild(fieldset);
@@ -30,6 +31,10 @@ export default function projectForm() {
     post.textContent = "Add project";
     fieldset.appendChild(post);
 
+    const close = document.createElement("button");
+    close.textContent = "Close";
+    fieldset.appendChild(close);
+
     post.addEventListener("click", (event) => {
         event.preventDefault();
         projects.push(titleInput.value);
@@ -39,9 +44,14 @@ export default function projectForm() {
         projectElemnt.textContent = addProject.projectName();
         projectList.appendChild(projectElemnt);
         form.remove();
-        const newProject = document.querySelector(".add-project");
         newProject.style.visibility = "visible";
     });
+
+    close.addEventListener("click", (event) => {
+        event.preventDefault();
+        form.remove();
+        newProject.style.visibility = "visible";
+    })
 }
 
 // todo-item form 
