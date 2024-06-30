@@ -29,7 +29,7 @@ body {
     text-align: center;
 }
 
-.default-project {
+.default-project, .project-element {
     width: 75%;
     font-size: 1em;
 }

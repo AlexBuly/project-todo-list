@@ -1,3 +1,5 @@
+import projectForm from "./forms";
+
 export default function DefaultLoading() {
     const container = document.querySelector(".main-container");
 
@@ -20,6 +22,7 @@ export default function DefaultLoading() {
     projectList.appendChild(first);
     
     const projectName = document.createElement("h1");
+    projectName.classList.add("project-head");
     todoViewing.appendChild(projectName);
     
     first.addEventListener("click", () => {
@@ -30,5 +33,12 @@ export default function DefaultLoading() {
     newProject.classList.add("add-project");
     newProject.textContent = "Add Project";
     projectList.appendChild(newProject);
+
+    newProject.addEventListener("click", () => {
+        newProject.style.visibility = "hidden";
+        projectForm();
+
+
+    });
 
 }
