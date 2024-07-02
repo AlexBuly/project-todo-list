@@ -1,11 +1,12 @@
 import DefaultLoading from "./defaultLoading";
 import Project from "./projects";
 import Todo from "./todoItem";
+import AddTodo from "./addTodo";
 
 // project form 
 
 export function projectForm() {
-    const projectList = document.querySelector(".projects")
+    const projectList = document.querySelector(".projects");
     const projectHead = document.querySelector(".project-head");
     const todoViewing = document.querySelector(".todos");
     const projects = [];
@@ -20,7 +21,7 @@ export function projectForm() {
     const br = document.createElement("br");
 
     const titleInput = document.createElement("input");
-    titleInput.type = "text"
+    titleInput.type = "text";
     titleInput.id = "title";
     titleInput.name= "title";
     const tLabel = document.createElement("label");
@@ -40,8 +41,10 @@ export function projectForm() {
     fieldset.appendChild(close);
 
     post.addEventListener("click", (event) => {
+        // addProject()
         event.preventDefault();
         projects.push(titleInput.value);
+        console.log(titleInput.value);
         const addProject = new Project(projects[projects.length - 1]);
         const projectElemnt = document.createElement("button");
         projectElemnt.classList.add("project-element");
@@ -59,7 +62,7 @@ export function projectForm() {
         newTodo.textContent = "New Item"
         todoViewing.appendChild(newTodo);
 
-        newTodo.addEventListener("click", todoForm)
+        newTodo.addEventListener("click", todoForm);
     });
 
     close.addEventListener("click", (event) => {
@@ -71,12 +74,12 @@ export function projectForm() {
 
 // todo-item form 
 export function todoForm() {
-    const todoItems = [];
     const todoViewing = document.querySelector(".todos");
      const newTodo = document.querySelector(".todo-btn");
 
-     newTodo.style.visibility = "hidden";
+    newTodo.style.visibility = "hidden";
     const form = document.createElement("form");
+    form.classList.add("todo-form");
     const fieldset = document.createElement("fieldset");
     form.setAttribute("method", "post");
     form.setAttribute("action", "/");
@@ -86,10 +89,10 @@ export function todoForm() {
 
     const titleInput = document.createElement("input");
     titleInput.type = "text"
-    titleInput.id = "title";
-    titleInput.name= "title";
+    titleInput.id = "titleTodo";
+    titleInput.name= "titleTodo";
     const tLabel = document.createElement("label");
-    tLabel.htmlFor = "title";
+    tLabel.htmlFor = "titleTodo";
     tLabel.textContent = "Title: ";
     fieldset.appendChild(tLabel)
     fieldset.appendChild(titleInput);
@@ -117,13 +120,24 @@ export function todoForm() {
     fieldset.appendChild(dueInput);
     fieldset.appendChild(br.cloneNode());
 
-    const pInput = document.createElement("input");
-    pInput.type = "text"
+    const pInput = document.createElement("select");
     pInput.id = "priority";
-    pInput.name= "priority";
+    pInput.name = "priority";
     const pLabel = document.createElement("label");
     pLabel.htmlFor = "priority";
-    pLabel.textContent = "Priority: ";
+    pLabel.textContent = "Priority:";
+    const option1 = document.createElement("option");
+    const option2 = document.createElement("option");
+    const option3 = document.createElement("option");
+    option1.value = "Low";
+    option1.textContent = "Low";
+    option2.value = "Medium";
+    option2.textContent = "Medium";
+    option3.value = "High";
+    option3.textContent = "High";
+    pInput.appendChild(option1);
+    pInput.appendChild(option2);
+    pInput.appendChild(option3);
     fieldset.appendChild(pLabel)
     fieldset.appendChild(pInput);
     fieldset.appendChild(br.cloneNode());
@@ -136,6 +150,11 @@ export function todoForm() {
     const close = document.createElement("button");
     close.textContent = "Close";
     fieldset.appendChild(close);
+
+    post.addEventListener("click", (event) => {
+        event.preventDefault();
+        AddTodo();
+    })
 
     close.addEventListener("click", (event) => {
         event.preventDefault();

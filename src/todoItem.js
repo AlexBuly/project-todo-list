@@ -12,11 +12,11 @@ export default function Todo(title, description, dueDate, priority) {
         return `${this.description}`;
     }
 
-    this.todoDo = () => {
+    this.todoDue = () => {
         return `${this.dueDate}`;
     }
 
-    this.priority = () => {
+    this.todoPriority = () => {
         return `${this.priority}`;
     }
 }
