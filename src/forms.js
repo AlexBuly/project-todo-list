@@ -4,7 +4,8 @@ import Project from "./projects";
 // project form 
 
 export default function projectForm() {
-    const projectList = document.querySelector(".projects");
+    const projectList = document.querySelector(".projects")
+    const projectHead = document.querySelector(".project-head");
     const projects = [];
 
     const form = document.createElement("form");
@@ -45,6 +46,10 @@ export default function projectForm() {
         projectList.appendChild(projectElemnt);
         form.remove();
         newProject.style.visibility = "visible";
+
+        projectElemnt.addEventListener("click", () => {
+            projectHead.textContent = addProject.projectName();
+        });
     });
 
     close.addEventListener("click", (event) => {
