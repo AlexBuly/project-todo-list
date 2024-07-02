@@ -4,7 +4,19 @@ export default function Todo(title, description, dueDate, priority) {
     this.dueDate = dueDate;
     this.priority = priority;
 
-    this.todoItems = () => {
-        return `${this.title}, ${this.description}, ${this.dueDate}, ${this.priority}`;
+    this.todoTitle = () => {
+        return `${this.title}`;
+    }
+
+    this.todoDes = () => {
+        return `${this.description}`;
+    }
+
+    this.todoDo = () => {
+        return `${this.dueDate}`;
+    }
+
+    this.priority = () => {
+        return `${this.priority}`;
     }
 }

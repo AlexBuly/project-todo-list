@@ -1,4 +1,4 @@
-import projectForm from "./forms";
+import {projectForm, todoForm} from "./forms";
 
 export default function DefaultLoading() {
     const container = document.querySelector(".main-container");
@@ -31,7 +31,7 @@ export default function DefaultLoading() {
     
     const newProject = document.createElement("button");
     newProject.classList.add("add-project");
-    newProject.textContent = "Add Project";
+    newProject.textContent = "New Project";
     projectList.appendChild(newProject);
 
     newProject.addEventListener("click", () => {
