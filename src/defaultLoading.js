@@ -37,8 +37,5 @@ export default function DefaultLoading() {
     newProject.addEventListener("click", () => {
         newProject.style.visibility = "hidden";
         projectForm();
-
-
     });
-
 }

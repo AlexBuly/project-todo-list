@@ -2,6 +2,7 @@ import DefaultLoading from "./defaultLoading";
 import Project from "./projects";
 import Todo from "./todoItem";
 import AddTodo from "./addTodo";
+import closeForm from "./closeForm";
 
 // project form 
 
@@ -54,21 +55,22 @@ export function projectForm() {
         newProject.style.visibility = "visible";
 
         projectElemnt.addEventListener("click", () => {
+            // todoButton();
             projectHead.textContent = addProject.projectName();
+            const newTodo = document.createElement("button");
+            newTodo.classList.add("todo-btn");
+            newTodo.textContent = "New Item"
+            todoViewing.appendChild(newTodo);
+
+            newTodo.addEventListener("click", todoForm);
         });
-
-        const newTodo = document.createElement("button");
-        newTodo.classList.add("todo-btn");
-        newTodo.textContent = "New Item"
-        todoViewing.appendChild(newTodo);
-
-        newTodo.addEventListener("click", todoForm);
     });
 
     close.addEventListener("click", (event) => {
         event.preventDefault();
-        form.remove();
-        newProject.style.visibility = "visible";
+        // form.remove();
+        // newProject.style.visibility = "visible";
+        closeForm(form, newProject);
     })
 }
 
@@ -158,8 +160,7 @@ export function todoForm() {
 
     close.addEventListener("click", (event) => {
         event.preventDefault();
-        form.remove();
-        newTodo.style.visibility = "visible";
+        closeForm(form, newTodo);
     })
 
 
