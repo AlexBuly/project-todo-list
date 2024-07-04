@@ -2,6 +2,7 @@ import DefaultLoading from "./defaultLoading";
 import { todoForm } from "./forms";
 import Todo from "./todoItem";
 
+// Adds todo item 
 export default function AddTodo() {
     const titleArray = [];
     const desArray = [];
@@ -21,7 +22,6 @@ export default function AddTodo() {
     pArray.push(priority.value);
 
    const addTodo = new Todo(titleArray[titleArray.length -1 ], desArray[desArray.length -1], dateArray[dateArray.length -1], pArray[pArray.length - 1]);
-
    const todoElement = document.createElement("div");
    todoElement.classList.add("todo-element");
    if (priority.value === "Low") {
@@ -48,8 +48,8 @@ export default function AddTodo() {
     todoElement.appendChild(pri);
 
     todoForm.remove();
-    const newTodo = document.querySelector(".todo-btn");
-    newTodo.style.visibility = "visible";
+    //const newTodo = document.querySelector(".todo-btn");
+    //newTodo.style.visibility = "visible";
 
 
 

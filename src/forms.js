@@ -3,18 +3,16 @@ import Project from "./projects";
 import Todo from "./todoItem";
 import AddTodo from "./addTodo";
 import closeForm from "./closeForm";
+import addProject from "./addProject";
 
 // project form 
 
 export function projectForm() {
     const projectList = document.querySelector(".projects");
-    const projectHead = document.querySelector(".project-head");
-    const todoViewing = document.querySelector(".todos");
-    const projects = [];
 
     const form = document.createElement("form");
+    form.classList.add("project-form");
     const fieldset = document.createElement("fieldset");
-    const newProject = document.querySelector(".add-project");
     form.setAttribute("method", "post");
     form.setAttribute("action", "/");
     form.appendChild(fieldset);
@@ -41,45 +39,13 @@ export function projectForm() {
     close.textContent = "Close";
     fieldset.appendChild(close);
 
-    post.addEventListener("click", (event) => {
-        // addProject()
-        event.preventDefault();
-        projects.push(titleInput.value);
-        console.log(titleInput.value);
-        const addProject = new Project(projects[projects.length - 1]);
-        const projectElemnt = document.createElement("button");
-        projectElemnt.classList.add("project-element");
-        projectElemnt.textContent = addProject.projectName();
-        projectList.appendChild(projectElemnt);
-        form.remove();
-        newProject.style.visibility = "visible";
-
-        projectElemnt.addEventListener("click", () => {
-            // todoButton();
-            projectHead.textContent = addProject.projectName();
-            const newTodo = document.createElement("button");
-            newTodo.classList.add("todo-btn");
-            newTodo.textContent = "New Item"
-            todoViewing.appendChild(newTodo);
-
-            newTodo.addEventListener("click", todoForm);
-        });
-    });
-
-    close.addEventListener("click", (event) => {
-        event.preventDefault();
-        // form.remove();
-        // newProject.style.visibility = "visible";
-        closeForm(form, newProject);
-    })
+    post.addEventListener("click", addProject);
 }
 
 // todo-item form 
 export function todoForm() {
     const todoViewing = document.querySelector(".todos");
-     const newTodo = document.querySelector(".todo-btn");
-
-    newTodo.style.visibility = "hidden";
+    
     const form = document.createElement("form");
     form.classList.add("todo-form");
     const fieldset = document.createElement("fieldset");
@@ -158,9 +124,8 @@ export function todoForm() {
         AddTodo();
     })
 
-    close.addEventListener("click", (event) => {
-        event.preventDefault();
-        closeForm(form, newTodo);
+    close.addEventListener("click", () => {
+        form.remove();
     })
 
 
