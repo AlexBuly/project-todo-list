@@ -7,13 +7,16 @@ import projectSide from "./projectSide";
 export default function addProject(event) {
     event.preventDefault();
     projectSide();
-    const projects = [];
+    
+    let projects = localStorage.getItem('project') ? 
+    JSON.parse(localStorage.getItem('project')) 
+    : [];
+    
     const titleInput = document.getElementById("title");
-    const formProject = document.querySelector(".project-form");
-    const newProject = document.querySelector(".add-project");
     const projectElemnt = document.querySelector(".project-element");
     projects.push(titleInput.value);   
+    
     const addProject = new Project(projects[projects.length - 1]);
+    localStorage.setItem('project', JSON.stringify(projects));
     projectElemnt.textContent = addProject.projectName();
-    closeForm(formProject, newProject);
 }

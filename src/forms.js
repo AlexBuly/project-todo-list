@@ -9,6 +9,7 @@ import addProject from "./addProject";
 
 export function projectForm() {
     const projectList = document.querySelector(".projects");
+    const newProject = document.querySelector(".add-project");
 
     const form = document.createElement("form");
     form.classList.add("project-form");
@@ -38,6 +39,10 @@ export function projectForm() {
     const close = document.createElement("button");
     close.textContent = "Close";
     fieldset.appendChild(close);
+
+    close.addEventListener("click", () => {
+        closeForm(form, newProject);
+    });
 
     post.addEventListener("click", addProject);
 }
@@ -114,6 +119,7 @@ export function todoForm() {
     post.type = "sumbit";
     post.textContent = "Add item";
     fieldset.appendChild(post);
+    const newProject = document.querySelector(".create-project");
 
     const close = document.createElement("button");
     close.textContent = "Close";
@@ -122,10 +128,12 @@ export function todoForm() {
     post.addEventListener("click", (event) => {
         event.preventDefault();
         AddTodo();
+        closeForm(form, newProject);
     })
 
-    close.addEventListener("click", () => {
-        form.remove();
+    close.addEventListener("click", (event) => {
+        event.preventDefault();
+        closeForm(form, newProject)
     })
 
 
