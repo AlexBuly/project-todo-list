@@ -21,16 +21,8 @@ export default function DefaultLoading() {
     first.textContent = "Work";
     projectList.appendChild(first);
     
-    const projectName = document.createElement("h1");
-    projectName.classList.add("project-head");
-    todoViewing.appendChild(projectName);
-    
-    first.addEventListener("click", () => {
-      projectName.textContent = first.textContent;
-    });
-    
     const newProject = document.createElement("button");
-    newProject.classList.add("add-project");
+    newProject.classList.add("create-project");
     newProject.textContent = "New Project";
     projectList.appendChild(newProject);
 
@@ -38,4 +30,21 @@ export default function DefaultLoading() {
         newProject.style.visibility = "hidden";
         projectForm();
     });
+
+    const projectS = JSON.parse(localStorage.getItem('project'));
+    
+    
+    if (localStorage.length >= 1) {
+      console.log(projectS.length);
+      console.log(projectS);
+    }
+
+    for (let i = 0; i < projectS.length; i++) {
+      const button = document.createElement("button");
+      button.id = "project-btn";
+      button.textContent = projectS[i];
+      projectList.appendChild(button);
+    }
+
+    //localStorage.clear()
 }
