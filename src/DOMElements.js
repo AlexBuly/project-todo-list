@@ -14,6 +14,13 @@ export function createInput(type, name, id) {
     return input;
 }
 
+export function createSelect(name, id) {
+    const select = document.createElement("select");
+    if (name) select.name = name;
+    if (id) select.id = id;
+    return select;
+}
+
 export function createFieldset() {
     const fieldset = document.createElement("fieldset");
     return fieldset;
@@ -42,4 +49,11 @@ export function createDiv(className) {
 export function createBreak() {
     const br = document.createElement("br");
     return br;
+}
+
+export function createOption(value, textContent) {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = textContent;
+    return option;
 }
