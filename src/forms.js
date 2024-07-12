@@ -30,7 +30,7 @@ export function projectForm() {
         event.preventDefault();
         addProject();
         closeForm(form, newProject);
-        projectPage.style.visibility = "visible";
+        projectPage.style.display = "block";
     });
 
     const close = createButton("Close", "close-element");
@@ -38,7 +38,7 @@ export function projectForm() {
 
     close.addEventListener("click", () => {
         closeForm(form, newProject);
-        projectPage.style.visibility = "visible";
+        projectPage.style.display = "block";
     });
 }
 
@@ -96,6 +96,8 @@ export function todoForm() {
     submit.addEventListener("click", (event) => {
         event.preventDefault();
         createTodo();
+        closeForm(form, todoBtn);
+        defaultTodo.style.display = "block";
     });
 
 
@@ -104,7 +106,7 @@ export function todoForm() {
 
     close.addEventListener("click", () => {
         closeForm(form, todoBtn);
-        defaultTodo.style.visibility = "visible";
+        defaultTodo.style.display = "block";
 
     })
 }
