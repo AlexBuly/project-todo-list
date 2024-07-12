@@ -1,50 +1,100 @@
-import {projectForm, todoForm} from "./forms";
+import { createForm, createFieldset, createButton, createDiv } from "./DOMElements";
+import { projectForm, todoForm } from "./forms";
+import { createProjectArray, pushToProjectArray, getArray } from "./arrays";
+import Project from "./projects";
+import { getProject, setProjects, AddProject, getTodos } from "./arrays";
+import { addProject } from "./addProject";
+import closeForm from "./closeForm";
 
 export default function DefaultLoading() {
     const container = document.querySelector(".main-container");
-
-    const projectList = document.createElement("div");
-    projectList.classList.add("projects");
-    container.appendChild(projectList);
     
-    const todoViewing = document.createElement("div");
-    todoViewing.classList.add("todos");
+   const projects = getProject();
+    
+    const projectList = createDiv("projects");
+    container.appendChild(projectList);
+
+    const projectElement = createDiv("project-page");
+    projectList.appendChild(projectElement);
+
+    const todoViewing = createDiv("todos");
     container.appendChild(todoViewing);
     
     const sideHeading = document.createElement("h2");
     sideHeading.classList.add("side-heading")
     sideHeading.textContent = "Projects";
-    projectList.appendChild(sideHeading);
+    projectElement.appendChild(sideHeading);
+
+     const projectHeading = document.createElement("h1");
+     projectHeading.classList.add("project-head");
+     projectHeading.textContent = "My Project";
+     todoViewing.appendChild(projectHeading);
     
-    const first = document.createElement("button");
-    first.classList.add("default-project");
-    first.textContent = "Work";
-    projectList.appendChild(first);
-    
-    const newProject = document.createElement("button");
-    newProject.classList.add("create-project");
-    newProject.textContent = "New Project";
-    projectList.appendChild(newProject);
+    const first = createButton("My Project", "default-project");
+    projectElement.appendChild(first);
+  
+    const newProject = createButton("New Project", "create-project");
+    projectElement.appendChild(newProject);
 
     newProject.addEventListener("click", () => {
-        newProject.style.visibility = "hidden";
-        projectForm();
+      projectElement.style.visibility = "hidden";
+      projectForm();
+    })
+
+    const todoBtn = createButton("New Todo", "new-todo");
+    todoViewing.appendChild(todoBtn);
+
+    todoBtn.addEventListener("click", () => {
+      defaultProject.style.visibility = "hidden";
+      todoForm();
     });
+
+    const defaultProject = createDiv("todo-container");
+    defaultProject.style.backgroundColor = "white";
+    todoViewing.appendChild(defaultProject);
+
+
+    const todoTitle = document.createElement("h2");
+    todoTitle.textContent = "TODO";
+    defaultProject.appendChild(todoTitle);
+
+    const description = createDiv("description");
+    const dueDate = createDiv("due-date");
+    const pri = createDiv("priority");
+
+    description.textContent = "This is the project description";
+    dueDate.textContent = "April 4, 2025";
+    pri.textContent = "medium";
+
+    if (pri.textContent == "high") {
+      defaultProject.style.backgroundColor = "red";
+      defaultProject.style.color = "white";
+    } else if (pri.textContent == "medium") {
+      defaultProject.style.backgroundColor = "yellow";
+    } else if (pri.textContent = "low") {
+      defaultProject.style.backgroundColor = "green";
+      defaultProject.style.color = "white";
+    }
+ 
+    defaultProject.appendChild(description);
+    defaultProject.appendChild(dueDate);
+    defaultProject.appendChild(pri);
+
+   AddProject(todoTitle.textContent);
+  
+   const todos = getTodos();
+    
+    const projectObj = new Project(projects[0], todos);
+    console.log(projectObj);
 
     const projectS = JSON.parse(localStorage.getItem('project'));
     
-    
-    if (localStorage.length >= 1) {
-      console.log(projectS.length);
-      console.log(projectS);
-    }
-
     for (let i = 0; i < projectS.length; i++) {
       const button = document.createElement("button");
       button.id = "project-btn";
       button.textContent = projectS[i];
-      projectList.appendChild(button);
-    }
-
-    //localStorage.clear()
+      projectElement.appendChild(button);
+    }   
 }
+
+//localStorage.clear();
