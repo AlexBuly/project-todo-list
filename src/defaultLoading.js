@@ -1,4 +1,4 @@
-import { createForm, createFieldset, createButton, createDiv } from "./DOMElements";
+import { createForm, createFieldset, createButton, createDiv, getTodoContainer } from "./DOMElements";
 import { projectForm, todoForm } from "./forms";
 import { createProjectArray, pushToProjectArray, getArray } from "./arrays";
 import Project from "./projects";
@@ -37,21 +37,24 @@ export default function DefaultLoading() {
     projectElement.appendChild(newProject);
 
     newProject.addEventListener("click", () => {
-      projectElement.style.visibility = "hidden";
+      projectElement.style.display = "none";
       projectForm();
     })
 
     const todoBtn = createButton("New Todo", "new-todo");
     todoViewing.appendChild(todoBtn);
 
+    const todoContainer = getTodoContainer();
+    todoViewing.appendChild(todoContainer);
+
     todoBtn.addEventListener("click", () => {
-      defaultProject.style.visibility = "hidden";
+      todoContainer.style.display = "none";
       todoForm();
     });
 
-    const defaultProject = createDiv("todo-container");
+    const defaultProject = createDiv("todo-element");
     defaultProject.style.backgroundColor = "white";
-    todoViewing.appendChild(defaultProject);
+    todoContainer.appendChild(defaultProject);
 
 
     const todoTitle = document.createElement("h2");
@@ -85,16 +88,16 @@ export default function DefaultLoading() {
    const todos = getTodos();
     
     const projectObj = new Project(projects[0], todos);
-    console.log(projectObj);
+    //console.log(projectObj);
 
-    const projectS = JSON.parse(localStorage.getItem('project'));
+    //const projectS = JSON.parse(localStorage.getItem('project'));
     
-    for (let i = 0; i < projectS.length; i++) {
-      const button = document.createElement("button");
-      button.id = "project-btn";
-      button.textContent = projectS[i];
-      projectElement.appendChild(button);
-    }   
+    // for (let i = 0; i < projectS.length; i++) {
+    //   const button = document.createElement("button");
+    //   button.id = "project-btn";
+    //   button.textContent = projectS[i];
+    //   projectElement.appendChild(button);
+    // }   
 }
 
 //localStorage.clear();
