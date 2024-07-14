@@ -13,7 +13,7 @@ export function addProject() {
 
     const projectArray = getProject();
     
-    todoArray = [];
+    todoArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
 
     newProject = new Project(projectArray[projectArray.length - 1], todoArray);
 

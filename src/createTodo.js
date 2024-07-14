@@ -19,6 +19,8 @@ export default function createTodo() {
     const todoArray = getArray();
 
     todoArray.push(todoObj);
+    
+    localStorage.setItem('items', JSON.stringify(todoArray));
 
     const newTodo = new Todo(todoObj.title, todoObj.description, todoObj.dueDate, todoObj.priority);
 
