@@ -1,10 +1,7 @@
-import { createForm, createFieldset, createButton, createDiv, getTodoContainer } from "./DOMElements";
+import { createButton, createDiv, getTodoContainer } from "./DOMElements";
 import { projectForm, todoForm } from "./forms";
-import { createProjectArray, pushToProjectArray, getArray } from "./arrays";
 import Project from "./projects";
-import { getProject, setProjects, AddProject, getTodos } from "./arrays";
-import { addProject } from "./addProject";
-import closeForm from "./closeForm";
+import { getProject, AddProject, getTodos } from "./arrays";
 
 export default function DefaultLoading() {
     const container = document.querySelector(".main-container");
@@ -88,16 +85,16 @@ export default function DefaultLoading() {
    const todos = getTodos();
     
     const projectObj = new Project(projects[0], todos);
-    //console.log(projectObj);
+    console.log(projectObj);
 
-    //const projectS = JSON.parse(localStorage.getItem('project'));
+    // const projectS = JSON.parse(localStorage.getItem('projects'));
     
     // for (let i = 0; i < projectS.length; i++) {
     //   const button = document.createElement("button");
     //   button.id = "project-btn";
     //   button.textContent = projectS[i];
     //   projectElement.appendChild(button);
-    // }   
+    // }  
 }
 
 //localStorage.clear();

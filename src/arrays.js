@@ -18,6 +18,6 @@ export function getTodos() {
     return todos;
 }
 
-export function addTodo(todoTitle, description, priority, dueDate) {
-    todos.push(todoTitle, description, dueDate, priority);
+export function addTodo(value1, value2, valu3, valu4) {
+    todos.push(value1, value2, valu3, valu4);
 }

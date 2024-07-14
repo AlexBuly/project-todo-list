@@ -57,3 +57,39 @@ export function createOption(value, textContent) {
     option.textContent = textContent;
     return option;
 }
+
+let todoContainer = createDiv("todo-container");
+let todoElement = createDiv("todo-element");
+
+let todoHeading = document.createElement("h2");
+todoHeading.classList.add("todo-heading");
+
+let description = createDiv("descriptionDiv");
+let date = createDiv("dueDateDiv");
+let pri = createDiv("priorityDiv");
+
+export function getHeading() {
+    return todoHeading;
+}
+
+export function getDes() {
+    return description;
+}
+
+
+export function getDate() {
+    return date;
+
+}
+
+export function getPriority() {
+    return pri;
+}
+
+export function getTodo() {
+    return todoElement;
+}
+
+export function getTodoContainer() {
+    return todoContainer;
+}

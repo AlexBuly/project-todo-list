@@ -32,7 +32,9 @@ body {
 }
 
 .todo-container {
-    width: 60%;
+    width: 100%;
+    flex-direction: column;
+    gap: 1em;
 }
 
 .side-heading {
@@ -46,4 +48,18 @@ body {
 
 button {
     cursor: pointer;
+}
+
+.element-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.element-title h2 {
+   margin: auto;
+}
+
+.element-title button {
+    margin: 1em;
 }
