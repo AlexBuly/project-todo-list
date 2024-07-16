@@ -1,31 +1,44 @@
-import { AddProject, getProject } from "./arrays";
+import { AddProject, getProject, setProject } from "./arrays";
 import Project from "./projects";
 import { openProject } from "./openProject";
 
 let newProject;
 let todoArray;
+let i = 0;
+let projects = getProject();
 
 export function addProject() {
     const titleValue = document.querySelector("#title").value;
     const projectPage = document.querySelector(".project-page");
-
-    AddProject(titleValue);
-
-    const projectArray = getProject();
     
-    todoArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
+    todoArray = [];
 
-    newProject = new Project(projectArray[projectArray.length - 1], todoArray);
+    const prjObj = {
+        title: titleValue,
+        todo: todoArray,
+        id: ++i   
+    }
+
+    AddProject(prjObj);
+
+
+    newProject = new Project(prjObj.title, prjObj.todo, prjObj.id);
 
     const projectBtn = document.createElement("button");
-    projectBtn.id = "project-btn";
+    projectBtn.classList.add("project-btn");
+    projectBtn.id = i;
     projectBtn.textContent = newProject.projectName();
     projectPage.appendChild(projectBtn);
 
-    projectBtn.addEventListener("click", () => {
-        openProject();
+    // gets a particular Project instance 
+    projectBtn.addEventListener("click", (event) => {
+        //openProject();
+        let target = event.target.id;
+        const currProject = projects.find(project => project.id == target);
+        setProject(currProject);
+        console.log(getProject());
     });
-
+    
     console.log(newProject);
 
 }
