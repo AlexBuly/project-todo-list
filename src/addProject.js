@@ -8,8 +8,6 @@ let todoArray;
 let i = 0;
 let prjObj;
 
-let projects = getProject();
-
 export function addProject() {
     const titleValue = document.querySelector("#title").value;
 

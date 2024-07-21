@@ -1,13 +1,12 @@
-import { createButton, createDiv, getTodoContainer } from "./DOMElements";
+import { createButton, createDiv, getTodoContainer} from "./DOMElements";
+import { defaultProject } from "./projectElement";
 import { projectForm, todoForm } from "./forms";
 import Project from "./projects";
 import { getProject, AddProject, getTodos } from "./arrays";
 
 export default function DefaultLoading() {
     const container = document.querySelector(".main-container");
-    
-   const projects = getProject();
-    
+  
     const projectList = createDiv("projects");
     container.appendChild(projectList);
 
@@ -22,71 +21,15 @@ export default function DefaultLoading() {
     sideHeading.textContent = "Projects";
     projectElement.appendChild(sideHeading);
 
-     const projectHeading = document.createElement("h1");
-     projectHeading.classList.add("project-head");
-     projectHeading.textContent = "My Project";
-     todoViewing.appendChild(projectHeading);
+    //const todos = getTodos();
+
+    defaultProject();
     
-    const first = createButton("My Project", "default-project");
-    projectElement.appendChild(first);
-  
-    const newProject = createButton("New Project", "create-project");
-    projectElement.appendChild(newProject);
-
-    newProject.addEventListener("click", () => {
-      projectElement.style.display = "none";
-      projectForm();
-    })
-
-    const todoBtn = createButton("New Todo", "new-todo");
-    todoViewing.appendChild(todoBtn);
-
-    const todoContainer = getTodoContainer();
-    todoViewing.appendChild(todoContainer);
-
-    todoBtn.addEventListener("click", () => {
-      todoContainer.style.display = "none";
-      todoForm();
-    });
-
-    const defaultProject = createDiv("todo-element");
-    defaultProject.style.backgroundColor = "white";
-    todoContainer.appendChild(defaultProject);
-
-
-    const todoTitle = document.createElement("h2");
-    todoTitle.textContent = "TODO";
-    defaultProject.appendChild(todoTitle);
-
-    const description = createDiv("description");
-    const dueDate = createDiv("due-date");
-    const pri = createDiv("priority");
-
-    description.textContent = "This is the project description";
-    dueDate.textContent = "April 4, 2025";
-    pri.textContent = "medium";
-
-    if (pri.textContent == "high") {
-      defaultProject.style.backgroundColor = "red";
-      defaultProject.style.color = "white";
-    } else if (pri.textContent == "medium") {
-      defaultProject.style.backgroundColor = "yellow";
-    } else if (pri.textContent = "low") {
-      defaultProject.style.backgroundColor = "green";
-      defaultProject.style.color = "white";
-    }
- 
-    defaultProject.appendChild(description);
-    defaultProject.appendChild(dueDate);
-    defaultProject.appendChild(pri);
-
-    const todos = getTodos();
-    
-    const defaultObj = {
+    /*const defaultObj = {
       title: todoTitle.textContent,
       todos: todos,
       id: "13"
-    }
+    }*/
 
   //  AddProject(defaultObj);
   

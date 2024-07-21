@@ -1,3 +1,5 @@
+import { getTodo } from "./addTodo";
+
 export function createForm(className) {
     const form = document.createElement("form");
     form.setAttribute("method", "post");
@@ -86,10 +88,71 @@ export function getPriority() {
     return pri;
 }
 
-export function getTodo() {
-    return todoElement;
-}
-
 export function getTodoContainer() {
     return todoContainer;
+}
+ 
+export function todoDisplay() {
+    const todoInput = document.querySelector("#todoTitle").value;
+    const desInput = document.querySelector("#description").value;
+    const dueDate = document.querySelector("#due-date").value;
+    const priority = document.querySelector("#priority").value;
+
+    const newTodo = getTodo();
+
+    const todoContainer = getTodoContainer();
+
+    const todoElement = createDiv("todo-element");
+    todoContainer.appendChild(todoElement);
+
+    const initialTitle = createDiv("element-title");
+    todoElement.appendChild(initialTitle);
+
+    const head = document.createElement("h2");
+    head.textContent = newTodo.todoTitle();
+    initialTitle.appendChild(head);
+
+    const toggleOpen = createButton("toggleOpen");
+    toggleOpen.textContent = "+"
+    initialTitle.appendChild(toggleOpen);
+
+    const toggleClose = createButton("toggleClose");
+    toggleClose.textContent = "-"
+    initialTitle.appendChild(toggleClose);
+
+    const description = createDiv("descriptionDiv");
+    const dueDateDiv = createDiv("dueDiv");
+    const priorityDiv = createDiv("priorityDiv");
+
+    const bottomElements = createDiv("todo-content");
+    todoElement.appendChild(bottomElements);
+    
+    description.textContent = newTodo.todoDes();
+    dueDateDiv.textContent = newTodo.todoDue();
+    priorityDiv.textContent = newTodo.todoPriority();
+
+    bottomElements.appendChild(description);
+    bottomElements.appendChild(dueDateDiv);
+    bottomElements.appendChild(priorityDiv);
+
+    bottomElements.style.display = "none";
+
+    toggleOpen.addEventListener("click", () => {
+        bottomElements.style.display = "block";;
+    });
+
+    toggleClose.addEventListener("click", () => {
+        bottomElements.style.display = "none";
+    })
+
+
+    if (priority == "High") {
+        todoElement.style.backgroundColor = "red";
+        todoElement.style.color = "white"
+    } else if (priority == "Medium") {
+        todoElement.style.backgroundColor = "yellow";    
+    } else if (priority == "Low") {
+        todoElement.style.backgroundColor = "green";
+        todoElement.style.color = "white";
+    }
 }

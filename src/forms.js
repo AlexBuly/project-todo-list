@@ -2,8 +2,9 @@ import { createButton, createForm, createFieldset, createDiv, createLabel, creat
 import closeForm from "./closeForm";
 import DefaultLoading from "./defaultLoading";
 import { addProject } from "./addProject";
-import createTodo from "./createTodo";
+import addTodo from "./addTodo";
 import { projectElement } from "./projectElement";
+import { todoDisplay } from "./DOMElements";
 
 export function projectForm() {
     const projectList = document.querySelector(".projects");
@@ -97,7 +98,8 @@ export function todoForm() {
 
     submit.addEventListener("click", (event) => {
         event.preventDefault();
-        createTodo();
+        addTodo();
+        todoDisplay();
         closeForm(form, todoBtn);
         defaultTodo.style.display = "flex";
     });
