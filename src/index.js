@@ -1,8 +1,11 @@
 console.log("Test");
 import './style.css';
 import DefaultLoading from './defaultLoading';
+import { projectObj } from './addProject';
 
 DefaultLoading();
+
+//console.log(projectObj());
 
 /*
 
@@ -19,6 +22,10 @@ Main constructor/factory should have a title argument
 
 Within that, create additional todo-item constructor
 with title, description, and dueDate arguments 
+
+const todoItem = new Todo(title, description, dueDate, priority)
+
+localStorage.setItem("todo-item", todoItem.toString())
 
 Update project name and todo-items 
 

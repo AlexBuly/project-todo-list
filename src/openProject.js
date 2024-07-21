@@ -1,8 +1,14 @@
 import { getTodo } from "./DOMElements";
+import { getProject, setProjects } from "./arrays";
 import { getArray } from "./addProject";
+import { projectObj } from "./addProject";
 
-export function openProject() {
-    const todoContainer = document.querySelector(".todo-container");
-    todoContainer.textContent = `${getArray()}`;
-    console.log(getArray());
+let projects = getProject();
+
+export function openProject(event) {
+    const projectBtn = document.querySelector(".project-btn").id;
+    // This only displays the most recent instance of Todo 
+
+    
+
 }

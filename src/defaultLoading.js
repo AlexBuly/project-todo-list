@@ -80,12 +80,20 @@ export default function DefaultLoading() {
     defaultProject.appendChild(dueDate);
     defaultProject.appendChild(pri);
 
-   AddProject(todoTitle.textContent);
-  
-   const todos = getTodos();
+    const todos = getTodos();
     
-    const projectObj = new Project(projects[0], todos);
-    console.log(projectObj);
+    const defaultObj = {
+      title: todoTitle.textContent,
+      todos: todos,
+      id: "13"
+    }
+
+  //  AddProject(defaultObj);
+  
+  
+    
+  //   const projectObj = new Project(defaultObj.title, defaultObj.todos, defaultObj.id);
+  //   console.log(projectObj);
 
     // const projectS = JSON.parse(localStorage.getItem('projects'));
     
@@ -97,4 +105,4 @@ export default function DefaultLoading() {
     // }  
 }
 
-//localStorage.clear();
+localStorage.clear();

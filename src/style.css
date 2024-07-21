@@ -41,7 +41,7 @@ body {
     text-align: center;
 }
 
-.default-project, .project-element, #project-btn {
+.default-project, .project-element, .project-btn {
     width: 75%;
     font-size: 1em;
 }

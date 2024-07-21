@@ -1,6 +1,6 @@
-import { getProject } from "./arrays";
+import { getProject, setTodos } from "./arrays";
 import Todo from "./todoItem";
-import { projectObj, getArray } from "./addProject";
+import { projectObj, getArray, getObject, setTodo } from "./addProject";
 import { getTodoContainer, createDiv, createButton } from "./DOMElements";
 
 export default function createTodo() {
@@ -9,6 +9,9 @@ export default function createTodo() {
     const dueDate = document.querySelector("#due-date").value;
     const priority = document.querySelector("#priority").value;
 
+    const projects = getProject();
+
+
     const todoObj = {
         title: todoInput,
         description: desInput,
@@ -16,13 +19,16 @@ export default function createTodo() {
         priority: priority 
     }
 
-    const todoArray = getArray();
+    const todoArray = projects.todo;
 
-    todoArray.push(todoObj);
+    todoArray.push(todoObj); 
     
     localStorage.setItem('items', JSON.stringify(todoArray));
 
+    // so that todos can inserted into that project 
     const newTodo = new Todo(todoObj.title, todoObj.description, todoObj.dueDate, todoObj.priority);
+
+    //setTodos(newTodo);
 
     const todoContainer = getTodoContainer();
 
@@ -82,11 +88,11 @@ export default function createTodo() {
 
 
 
-    console.log(newTodo);
+    //console.log(newTodo);
 
-    console.log(todoArray);
+    //console.log(todoArray);
     
     console.log(getProject());
 
-    console.log(projectObj());
+    //console.log(projectObj());
 }

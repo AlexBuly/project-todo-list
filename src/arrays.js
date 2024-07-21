@@ -1,23 +1,24 @@
-let projects = [];
+
+let projects;
 
 export function getProject() {
     return projects;
 }
 
-export function AddProject(projectTitle) {
+export function AddToProject(projectTitle) {
     projects.push(projectTitle);
 }
 
-export function setProjects(newProject) {
+export function setProject(newProject) {
     projects = newProject;
 }
 
 let todos = []; 
 
-export function getTodos() {
-    return todos;
-}
-
 export function addTodo(value1, value2, valu3, valu4) {
     todos.push(value1, value2, valu3, valu4);
+}
+
+export function getTodos() {
+    return todos;
 }

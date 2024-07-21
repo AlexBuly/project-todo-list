@@ -3,6 +3,7 @@ import closeForm from "./closeForm";
 import DefaultLoading from "./defaultLoading";
 import { addProject } from "./addProject";
 import createTodo from "./createTodo";
+import { projectElement } from "./projectElement";
 
 export function projectForm() {
     const projectList = document.querySelector(".projects");
@@ -29,6 +30,7 @@ export function projectForm() {
     post.addEventListener("click", (event) => {
         event.preventDefault();
         addProject();
+        projectElement();
         closeForm(form, newProject);
         projectPage.style.display = "flex";
     });
