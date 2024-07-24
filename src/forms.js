@@ -71,7 +71,7 @@ export function todoForm() {
     fieldset.appendChild(desInput);
     fieldset.appendChild(br.cloneNode());
 
-    const dueDate = createInput("text", "due-date", "due-date");
+    const dueDate = createInput("date", "due-date", "due-date");
     const dueLabel = createLabel("due-date", "Due date:")
 
     fieldset.appendChild(dueLabel);
@@ -99,7 +99,7 @@ export function todoForm() {
     submit.addEventListener("click", (event) => {
         event.preventDefault();
         addTodo();
-        todoDisplay();
+        //todoDisplay();
         closeForm(form, todoBtn);
         defaultTodo.style.display = "flex";
     });

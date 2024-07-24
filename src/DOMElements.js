@@ -95,10 +95,12 @@ export function getTodoContainer() {
  
 export function todoDisplay() {
     //const project = getProject();
-    
+
     const newTodo = getTodo();
+    console.log(newTodo);
     
     const todoContainer = getTodoContainer();
+
 
     const todoElement = createDiv("todo-element");
     todoContainer.appendChild(todoElement);

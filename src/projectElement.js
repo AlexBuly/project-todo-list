@@ -5,10 +5,15 @@ import { getI } from "./addProject";
 import { displayTodos } from "./todoElements";
 import { createButton, createDiv, getTodoContainer } from "./DOMElements";
 import { projectForm, todoForm } from "./forms";
+import { todoDisplay } from "./DOMElements";
+import { getTodo, btnDisplay } from "./addTodo";
+import { getTodoArray } from "./addTodo";
+import Project from "./projects";
 
 export function projectElement() {
     const newProject = projectObj();
     const projectPage = document.querySelector(".project-page");
+    const projectHead = document.querySelector(".project-head");
     let i = getI();
     let project = getProject();
 
@@ -20,12 +25,16 @@ export function projectElement() {
 
     // gets a particular Project instance 
     projectBtn.addEventListener("click", (event) => {
-        //openProject();
+        projectHead.textContent  = newProject.projectName();
         let buttonId = event.target.id;
         const currProject = project.find(project => project.id == buttonId);
+        
         setProject(currProject);
-        //displayTodos();
         console.log(getProject());
+
+        if (currProject && currProject.todoInstance) {
+          currProject.todoInstance.displayObjects();
+        }
     });
 } 
 
@@ -33,14 +42,45 @@ export function defaultProject() {
     const todoViewing = document.querySelector(".todos");
     const projectBtn = document.querySelector(".project-page");
 
+
     const projectHeading = document.createElement("h1");
      projectHeading.classList.add("project-head");
-     projectHeading.textContent = "My Project";
      todoViewing.appendChild(projectHeading);
     
     const first = createButton("My Project", "default-project");
+    first.id = "0";
     projectBtn.appendChild(first);
-  
+
+    const defaultP = [];
+
+    setProject(defaultP);
+
+    const todos = [];
+
+    const dObject = {
+      title: "My Project",
+      todo: todos,
+      id: 0
+    }
+
+    defaultP.push(dObject);
+
+    const firstElement = new Project(dObject.title, dObject.todo, dObject.id);
+
+    let project = getProject();
+
+    first.addEventListener("click", (event) => {
+      projectHeading.textContent = firstElement.projectName();
+      let buttonId = event.target.id;
+      const currProject = project.find(project => project.id == buttonId);
+      setProject(currProject);
+      console.log(getProject());
+
+      if (currProject && currProject.todoInstance) {
+        currProject.todoInstance.displayObjects();
+      }
+    });
+
     const newProject = createButton("New Project", "create-project");
     projectBtn.appendChild(newProject);
 
@@ -63,31 +103,4 @@ export function defaultProject() {
     const defaultProject = createDiv("todo-element");
     defaultProject.style.backgroundColor = "white";
     todoContainer.appendChild(defaultProject);
-
-
-    const todoTitle = document.createElement("h2");
-    todoTitle.textContent = "TODO";
-    defaultProject.appendChild(todoTitle);
-
-    const description = createDiv("description");
-    const dueDate = createDiv("due-date");
-    const pri = createDiv("priority");
-
-    description.textContent = "This is the project description";
-    dueDate.textContent = "April 4, 2025";
-    pri.textContent = "medium";
-
-    if (pri.textContent == "high") {
-      defaultProject.style.backgroundColor = "red";
-      defaultProject.style.color = "white";
-    } else if (pri.textContent == "medium") {
-      defaultProject.style.backgroundColor = "yellow";
-    } else if (pri.textContent = "low") {
-      defaultProject.style.backgroundColor = "green";
-      defaultProject.style.color = "white";
-    }
- 
-    defaultProject.appendChild(description);
-    defaultProject.appendChild(dueDate);
-    defaultProject.appendChild(pri);
 }

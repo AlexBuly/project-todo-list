@@ -1,7 +1,8 @@
-import { AddToProject, getProject, setProject } from "./arrays";
+import { setProject } from "./arrays";
 import Project from "./projects";
 import { openProject } from "./openProject";
 import { getTodos } from "./arrays";
+import Todo from "./todoItem";
 
 let newProject;
 let todoArray;
@@ -12,7 +13,7 @@ export function addProject() {
     const titleValue = document.querySelector("#title").value;
 
     const project = [];
-    
+
     setProject(project);
     
     todoArray = [];
@@ -20,14 +21,14 @@ export function addProject() {
     prjObj = {
         title: titleValue,
         todo: todoArray,
-        id: ++i   
+        id: ++i, 
+        todoInstance: new Todo(todoArray)   
     }
 
    project.push(prjObj);
 
     newProject = new Project(prjObj.title, prjObj.todo, prjObj.id);
     console.log(newProject);
-
 }
 
 export function projectObj() {
