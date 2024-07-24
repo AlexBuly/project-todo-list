@@ -57,7 +57,7 @@ export function todoForm() {
     todoViewing.appendChild(form);
 
     const todoInput = createInput("text", "todoTitle", "todoTitle");
-    const tLabel = createLabel("titleTodo", "Title:");
+    const tLabel = createLabel("todoTitle", "Title:");
     const br = createBreak();
 
     fieldset.appendChild(tLabel);
