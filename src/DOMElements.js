@@ -1,4 +1,5 @@
 import { getTodo } from "./addTodo";
+import { getProject } from "./arrays";
 
 export function createForm(className) {
     const form = document.createElement("form");
@@ -93,13 +94,10 @@ export function getTodoContainer() {
 }
  
 export function todoDisplay() {
-    const todoInput = document.querySelector("#todoTitle").value;
-    const desInput = document.querySelector("#description").value;
-    const dueDate = document.querySelector("#due-date").value;
-    const priority = document.querySelector("#priority").value;
-
+    //const project = getProject();
+    
     const newTodo = getTodo();
-
+    
     const todoContainer = getTodoContainer();
 
     const todoElement = createDiv("todo-element");
@@ -145,13 +143,12 @@ export function todoDisplay() {
         bottomElements.style.display = "none";
     })
 
-
-    if (priority == "High") {
+    if (priorityDiv.textContent == "High") {
         todoElement.style.backgroundColor = "red";
         todoElement.style.color = "white"
-    } else if (priority == "Medium") {
+    } else if (priorityDiv.textContent == "Medium") {
         todoElement.style.backgroundColor = "yellow";    
-    } else if (priority == "Low") {
+    } else if (priorityDiv.textContent == "Low") {
         todoElement.style.backgroundColor = "green";
         todoElement.style.color = "white";
     }
