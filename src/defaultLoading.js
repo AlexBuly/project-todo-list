@@ -24,6 +24,32 @@ export default function DefaultLoading() {
     //const todos = getTodos();
 
     defaultProject();
+
+    const projectBtn = document.querySelector(".project-page");
+
+    const newProject = createButton("New Project", "create-project");
+    projectBtn.appendChild(newProject);
+
+    newProject.addEventListener("click", () => {
+      projectBtn.style.display = "none";
+      projectForm();
+    })
+
+    const todoBtn = createButton("New Todo", "new-todo");
+    todoViewing.appendChild(todoBtn);
+
+    const todoContainer = getTodoContainer();
+    todoViewing.appendChild(todoContainer);
+
+    todoBtn.addEventListener("click", () => {
+      todoContainer.style.display = "none";
+      todoForm();
+    });
+
+    
+
+    //console.log(projectStorage.length);
+
     
     /*const defaultObj = {
       title: todoTitle.textContent,
@@ -48,4 +74,4 @@ export default function DefaultLoading() {
     // }  
 }
 
-localStorage.clear();
+//localStorage.clear();
