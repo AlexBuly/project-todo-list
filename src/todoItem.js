@@ -1,37 +1,14 @@
 import { getTodoContainer, createButton, createDiv } from "./DOMElements";
 import { getTodo } from "./addTodo";
 
-/*export default function Todo(title, description, dueDate, priority) {
-    this.title = title;
-    this.description = description;
-    this.dueDate = dueDate;
-    this.priority = priority;
-
-    this.todoTitle = () => {
-        return `${this.title}`;
-    }
-
-    this.todoDes = () => {
-        return `${this.description}`;
-    }
-
-    this.todoDue = () => {
-        return `${this.dueDate}`;
-    }
-
-    this.todoPriority = () => {
-        return `${this.priority}`;
-    }
-}*/ 
-
-export default function Todo(objects) {
-    this.objects = objects;
+export default function Todo(todoItems) {
+    this.todoItems = todoItems;
 
     this.displayObjects = () => {
         const todoContainer = getTodoContainer();
         todoContainer.replaceChildren();
 
-        this.objects.forEach(obj => {
+        this.todoItems.forEach(item => {
             const todoElement = createDiv("todo-element");
             todoContainer.appendChild(todoElement);
 
@@ -39,7 +16,7 @@ export default function Todo(objects) {
             todoElement.appendChild(initialTitle);
 
             const head = document.createElement("h2");
-            head.textContent = obj.title;
+            head.textContent = item.title;
             initialTitle.appendChild(head);
 
             const toggleOpen = createButton("toggleOpen");
@@ -57,9 +34,9 @@ export default function Todo(objects) {
             const bottomElements = createDiv("todo-content");
             todoElement.appendChild(bottomElements);
             
-            description.textContent = obj.description;
-            dueDateDiv.textContent = obj.dueDate;
-            priorityDiv.textContent = obj.priority;
+            description.textContent = item.description;
+            dueDateDiv.textContent = item.dueDate;
+            priorityDiv.textContent = item.priority;
 
             bottomElements.appendChild(description);
             bottomElements.appendChild(dueDateDiv);
@@ -75,15 +52,13 @@ export default function Todo(objects) {
                 bottomElements.style.display = "none";
             })
 
-            if (priorityDiv.textContent == "High") {
-                todoElement.style.backgroundColor = "red";
-                todoElement.style.color = "white"
-            } else if (priorityDiv.textContent == "Medium") {
-                todoElement.style.backgroundColor = "yellow";    
-            } else if (priorityDiv.textContent == "Low") {
-                todoElement.style.backgroundColor = "green";
-                todoElement.style.color = "white";
-            }
+            todoElement.style.backgroundColor =
+                priorityDiv.textContent == "High" ? "red" :
+                priorityDiv.textContent == "Medium" ? "yellow" :
+                priorityDiv.textContent == "Low" ? "green" : "";
+
+            todoElement.style.color = 
+                priorityDiv.textContent == "High" || priorityDiv.textContent == "Low" ? "white" : "";
 
         });
     }
