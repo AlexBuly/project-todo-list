@@ -3,35 +3,40 @@ import { defaultProject } from "./projectElement";
 import { projectForm, todoForm } from "./forms";
 import Project from "./projects";
 import { getProject, AddProject, getTodos } from "./arrays";
+import { getI } from "./addProject";
+import { getTodo } from "./addTodo";
+import { displayProjects } from "./addToStorage";
 
 export default function DefaultLoading() {
     const container = document.querySelector(".main-container");
   
-    const projectList = createDiv("projects");
-    container.appendChild(projectList);
+    const project = createDiv("projects");
+    container.appendChild(project);
+
+    const sideHeading = document.createElement("h2");
+    sideHeading.textContent = "Projects";
+    sideHeading.classList.add("side-heading")
+    project.appendChild(sideHeading);
 
     const projectElement = createDiv("project-page");
-    projectList.appendChild(projectElement);
+    project.appendChild(projectElement);
 
     const todoViewing = createDiv("todos");
     container.appendChild(todoViewing);
-    
-    const sideHeading = document.createElement("h2");
-    sideHeading.classList.add("side-heading")
-    sideHeading.textContent = "Projects";
-    projectElement.appendChild(sideHeading);
+
 
     //const todos = getTodos();
 
     defaultProject();
+    displayProjects();
 
-    const projectBtn = document.querySelector(".project-page");
+    //const projectBtn = document.querySelector(".project-page");
 
     const newProject = createButton("New Project", "create-project");
-    projectBtn.appendChild(newProject);
+    sideHeading.appendChild(newProject);
 
     newProject.addEventListener("click", () => {
-      projectBtn.style.display = "none";
+      projectElement.style.display = "none";
       projectForm();
     })
 
@@ -46,7 +51,6 @@ export default function DefaultLoading() {
       todoForm();
     });
 
-    
 
     //console.log(projectStorage.length);
 
