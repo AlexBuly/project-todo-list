@@ -3,9 +3,9 @@ import { projectObj } from "./addProject";
 import { getProject } from "./arrays";
 import { getI } from "./addProject";
 import { createButton, createDiv, getTodoContainer } from "./DOMElements";
-import { projectForm, todoForm } from "./forms";
 import Project from "./projects";
 import Todo from "./todoItem";
+import { openProject } from "./openProject";
 
 export function projectElement() {
     const newProject = projectObj();
@@ -14,42 +14,37 @@ export function projectElement() {
     let i = getI();
     let project = getProject();
 
+
     const projectBtn = document.createElement("button");
     projectBtn.classList.add("project-btn");
     projectBtn.id = i;
     projectBtn.textContent = newProject.projectName();
     projectPage.appendChild(projectBtn);
 
-    // gets a particular Project instance 
-    projectBtn.addEventListener("click", (event) => {
-        projectHead.textContent  = newProject.projectName();
-        let buttonId = event.target.id;
-        const currProject = project.find(project => project.id == buttonId);
-        
-        setProject(currProject);
-        console.log(getProject());
+    // openProject(event, project, projectHead, newProject)
 
-        if (currProject && currProject.todoInstance) {
-          currProject.todoInstance.displayObjects();
-        }
-    });
+    // gets a particular Project instance 
+    projectBtn.addEventListener("click", (event) => openProject(event, project, projectHead, newProject));
 } 
+
 
 export function defaultProject() {
     const todoViewing = document.querySelector(".todos");
-    const projectBtn = document.querySelector(".project-page");
+    const projectPage = document.querySelector(".projects");
 
     const projectHeading = document.createElement("h1");
      projectHeading.classList.add("project-head");
      todoViewing.appendChild(projectHeading);
     
     const first = createButton("My Project", "default-project");
-    first.id = "0";
-    projectBtn.appendChild(first);
+    first.id = 0;
+    projectPage.appendChild(first);
 
     const defaultP = [];
 
     setProject(defaultP);
+
+    let project = getProject();
 
     const todos = [];
 
@@ -64,18 +59,5 @@ export function defaultProject() {
 
     const firstElement = new Project(dObject.title, dObject.todo, dObject.id);
 
-    let project = getProject();
-
-    first.addEventListener("click", (event) => {
-      projectHeading.textContent = firstElement.projectName();
-      let buttonId = event.target.id;
-      const currProject = project.find(project => project.id == buttonId);
-      
-      setProject(currProject);
-      console.log(getProject());
-
-      if (currProject && currProject.todoInstance) {
-        currProject.todoInstance.displayObjects();
-      }
-    });
+    first.addEventListener("click", (event) => openProject(event, project, projectHeading, firstElement))
 }
