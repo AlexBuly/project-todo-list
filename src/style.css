@@ -38,12 +38,19 @@ body {
 }
 
 .side-heading {
-    text-align: center;
+   justify-content: center;
+    display: grid;
+    gap: 1em;
 }
 
 .default-project, .project-element, .project-btn {
     width: 75%;
     font-size: 1em;
+}
+
+.default-project {
+    margin: 1em;
+    justify-content: center;
 }
 
 button {
