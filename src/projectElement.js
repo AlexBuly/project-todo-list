@@ -6,6 +6,8 @@ import { createButton, createDiv, getTodoContainer } from "./DOMElements";
 import Project from "./projects";
 import Todo from "./todoItem";
 import { openProject } from "./openProject";
+import { LocalStorage } from "./addToStorage";
+import { setCurrentProject } from "./arrays";
 
 export function projectElement() {
     const newProject = projectObj();
@@ -27,15 +29,12 @@ export function projectElement() {
     projectBtn.addEventListener("click", (event) => openProject(event, project, projectHead, newProject));
 } 
 
-
 export function defaultProject() {
+  const storage = LocalStorage();
     const todoViewing = document.querySelector(".todos");
     const projectPage = document.querySelector(".projects");
     const projectList = document.querySelector(".project-page");
-
-    const projectHeading = document.createElement("h1");
-     projectHeading.classList.add("project-head");
-     todoViewing.appendChild(projectHeading);
+    const projectHeading = document.querySelector(".project-head");
     
     const first = createButton("My Project", "default-project");
     first.id = 0;
@@ -60,5 +59,10 @@ export function defaultProject() {
 
     const firstElement = new Project(dObject.title, dObject.todo, dObject.id);
 
-    first.addEventListener("click", (event) => openProject(event, project, projectHeading, firstElement))
+    storage.storageTodo(project.id, dObject);
+
+    first.addEventListener("click", (event) => {
+      setCurrentProject(project.id);
+      openProject(event, project, projectHeading, firstElement)
+})
 }

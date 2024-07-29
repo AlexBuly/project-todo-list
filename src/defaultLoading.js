@@ -25,6 +25,11 @@ export default function DefaultLoading() {
     const todoViewing = createDiv("todos");
     container.appendChild(todoViewing);
 
+    const projectHeading = document.createElement("h1");
+    projectHeading.classList.add("project-head");
+    todoViewing.appendChild(projectHeading);
+
+
     const clearStorage = createButton("Clear");
     project.appendChild(clearStorage);
     clearStorage.style.marginTop = "1em";
