@@ -7,7 +7,7 @@ import { AddtoStorage } from "./addToStorage";
 
 let newProject;
 let todoArray;
-let i = 0;
+let date = Date.now();
 let prjObj;
 
 export function addProject() {
@@ -22,7 +22,7 @@ export function addProject() {
     prjObj = {
         title: titleValue,
         todo: todoArray,
-        id: ++i, 
+        id: date, 
         todoInstance: new Todo(todoArray)   
     }
 
@@ -44,8 +44,8 @@ export function getArray() {
     return todoArray;
 }
 
-export function getI() {
-    return i;
+export function getId() {
+    return date;
 }
 
 export function getObject() {
