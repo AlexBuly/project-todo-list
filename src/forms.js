@@ -31,7 +31,6 @@ export function projectForm() {
     post.addEventListener("click", (event) => {
         event.preventDefault();
         addProject();
-        projectElement();
         closeForm(form, newProject);
         projectPage.style.display = "flex";
     });

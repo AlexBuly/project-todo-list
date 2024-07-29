@@ -9,29 +9,11 @@ import { openProject } from "./openProject";
 import { LocalStorage } from "./addToStorage";
 import { setCurrentProject } from "./arrays";
 
-export function projectElement() {
-    const newProject = projectObj();
-    const projectPage = document.querySelector(".project-page");
-    const projectHead = document.querySelector(".project-head");
-    let i = getId();
-    let project = getProject();
+let dObject;
 
-
-    const projectBtn = document.createElement("button");
-    projectBtn.classList.add("project-btn");
-    projectBtn.id = i;
-    projectBtn.textContent = newProject.projectName();
-    projectPage.appendChild(projectBtn);
-
-    // openProject(event, project, projectHead, newProject)
-
-    // gets a particular Project instance 
-    projectBtn.addEventListener("click", (event) => openProject(event, project, projectHead, newProject));
-} 
+const storage = LocalStorage();
 
 export function defaultProject() {
-  const storage = LocalStorage();
-    const todoViewing = document.querySelector(".todos");
     const projectPage = document.querySelector(".projects");
     const projectList = document.querySelector(".project-page");
     const projectHeading = document.querySelector(".project-head");
@@ -48,7 +30,7 @@ export function defaultProject() {
 
     const todos = [];
 
-    const dObject = {
+    dObject = {
       title: "My Project",
       todo: todos,
       id: 0,
@@ -56,13 +38,7 @@ export function defaultProject() {
     }
 
     defaultP.push(dObject);
-
     const firstElement = new Project(dObject.title, dObject.todo, dObject.id);
 
-    storage.storageTodo(project.id, dObject);
-
-    first.addEventListener("click", (event) => {
-      setCurrentProject(project.id);
-      openProject(event, project, projectHeading, firstElement)
-})
+    first.addEventListener("click", (event) => openProject(event, project, projectHeading, firstElement))
 }

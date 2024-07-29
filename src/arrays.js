@@ -1,5 +1,10 @@
 
 let projects;
+let currentProject;
+
+export function setCurrentProject(projectId) {
+    currentProject = getProjectById(projectId);
+}
 
 export function getProject() {
     return projects;
@@ -17,4 +22,9 @@ let todos = [];
 
 export function getTodos() {
     return todos;
+}
+
+export function getProjectById(id) {
+    let projects = JSON.parse(localStorage.getItem('projects')) || [];
+    return projects.find(project => project.id === id);
 }

@@ -28,6 +28,8 @@ export function addProject() {
     //AddtoStorage(prjObj);
     project.push(prjObj);
     storage.AddToStorage(prjObj);
+    storage.displayProjects();
+    
     //AddtoStorage(prjObj);
 
    //localStorage.setItem("project", JSON.stringify(project));
