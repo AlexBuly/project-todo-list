@@ -17,6 +17,11 @@ export function displayProjects() {
     const projectElement = document.querySelector(".project-page");
     projectElement.textContent = '';
     const projectHead = document.querySelector(".project-head");
+    let projectStorage = JSON.parse(localStorage.getItem('projects')) || [];
+    projectStorage.map(project => {
+        project.todoInstance = Object.assign(new Todo(project.todo), project.todoInstance);
+        return project;
+    });
 
     projectStorage.forEach((project, todo, id, todoInstance) => {
         const btn = document.createElement("button");
