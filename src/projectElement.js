@@ -1,7 +1,7 @@
 import { setProject } from "./arrays";
 import { projectObj } from "./addProject";
 import { getProject } from "./arrays";
-import { getI } from "./addProject";
+import { getId } from "./addProject";
 import { createButton, createDiv, getTodoContainer } from "./DOMElements";
 import Project from "./projects";
 import Todo from "./todoItem";
@@ -11,7 +11,7 @@ export function projectElement() {
     const newProject = projectObj();
     const projectPage = document.querySelector(".project-page");
     const projectHead = document.querySelector(".project-head");
-    let i = getI();
+    let i = getId();
     let project = getProject();
 
 
@@ -31,6 +31,7 @@ export function projectElement() {
 export function defaultProject() {
     const todoViewing = document.querySelector(".todos");
     const projectPage = document.querySelector(".projects");
+    const projectList = document.querySelector(".project-page");
 
     const projectHeading = document.createElement("h1");
      projectHeading.classList.add("project-head");
@@ -38,7 +39,7 @@ export function defaultProject() {
     
     const first = createButton("My Project", "default-project");
     first.id = 0;
-    projectPage.appendChild(first);
+    projectPage.insertBefore(first, projectList);
 
     const defaultP = [];
 

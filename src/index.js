@@ -1,9 +1,10 @@
 console.log("Test");
 import './style.css';
 import DefaultLoading from './defaultLoading';
-import { projectObj } from './addProject';
 
 DefaultLoading();
+
+//localStorage.clear();
 
 //console.log(projectObj());
 
@@ -32,5 +33,6 @@ Update project name and todo-items
 Delete projects/todo-items 
 
 Uses localStorage to save on computer 
+  // Object.assign()
 
  */

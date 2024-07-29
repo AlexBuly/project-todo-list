@@ -1,9 +1,7 @@
 import { setProject } from "./arrays";
 import Project from "./projects";
-import { openProject } from "./openProject";
-import { getTodos } from "./arrays";
 import Todo from "./todoItem";
-import { AddtoStorage } from "./addToStorage";
+import { LocalStorage } from "./addToStorage";
 
 let newProject;
 let todoArray;
@@ -12,6 +10,7 @@ let prjObj;
 
 export function addProject() {
     const titleValue = document.querySelector("#title").value;
+    const storage = LocalStorage();
 
     let project = [];
 
@@ -28,7 +27,8 @@ export function addProject() {
 
     //AddtoStorage(prjObj);
     project.push(prjObj);
-    AddtoStorage(prjObj);
+    storage.AddToStorage(prjObj);
+    //AddtoStorage(prjObj);
 
    //localStorage.setItem("project", JSON.stringify(project));
 

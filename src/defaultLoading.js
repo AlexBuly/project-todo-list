@@ -5,10 +5,11 @@ import Project from "./projects";
 import { getProject, AddProject, getTodos } from "./arrays";
 import { getI } from "./addProject";
 import { getTodo } from "./addTodo";
-import { displayProjects } from "./addToStorage";
+import { LocalStorage } from "./addToStorage";
 
 export default function DefaultLoading() {
     const container = document.querySelector(".main-container");
+    const storage = LocalStorage();
   
     const project = createDiv("projects");
     container.appendChild(project);
@@ -24,11 +25,21 @@ export default function DefaultLoading() {
     const todoViewing = createDiv("todos");
     container.appendChild(todoViewing);
 
+    const clearStorage = createButton("Clear");
+    project.appendChild(clearStorage);
+    clearStorage.style.marginTop = "1em";
+
+    clearStorage.addEventListener("click", () => {
+      localStorage.clear();
+    })
+
 
     //const todos = getTodos();
 
     defaultProject();
-    displayProjects();
+    storage.displayProjects();
+
+
 
     //const projectBtn = document.querySelector(".project-page");
 

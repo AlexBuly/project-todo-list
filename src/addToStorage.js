@@ -5,47 +5,62 @@ import { getTodo } from "./addTodo";
 import Todo from "./todoItem";
 import Project from "./projects";
 
-let newTodo = getTodo();
+export function LocalStorage() {
+    const AddToStorage = (project) => {
+        let projectStorage = JSON.parse(localStorage.getItem('projects')) || [];
+        projectStorage.push(project)
+        localStorage.setItem('projects', JSON.stringify(projectStorage));
+    }
 
-export function AddtoStorage(project) {
-    let projectStorage = JSON.parse(localStorage.getItem('projects')) || [];
-    projectStorage.push(project);
-    localStorage.setItem('projects', JSON.stringify(projectStorage))
-}
+    const getStorageProject = () => {
+        let projectStorage = JSON.parse(localStorage.getItem('projects')) || [];
+        const currProject = getProject();
+        projectStorage.map(project => {
+            project.todoInstance = Object.assign(new Todo(project.todo), currProject.todoInstance);
+            return project;
+        });
 
-export function displayProjects() {
-    const projectElement = document.querySelector(".project-page");
-    projectElement.textContent = '';
-    const projectHead = document.querySelector(".project-head");
-    let projectStorage = JSON.parse(localStorage.getItem('projects')) || [];
-    projectStorage.map(project => {
-        project.todoInstance = Object.assign(new Todo(project.todo), project.todoInstance);
-        return project;
-    });
+        return projectStorage;
+    }
 
-    projectStorage.forEach((project, todo, id, todoInstance) => {
-        const btn = document.createElement("button");
-        btn.classList.add("project-btn");
-        btn.id = project.id;
-        btn.textContent = project.title || `Project ${id + 1}`;
-        projectElement.appendChild(btn);
-        const deleteBtn = document.createElement("button");
-        deleteBtn.classList.add("delete");
-        deleteBtn.textContent = "Delete";
-        projectElement.appendChild(deleteBtn);
-        todo = `project-${todo}`;
-        //todoInstance = `project-${todoInstance}`;
-        todoInstance = project.todoInstance;
-        console.log(projectStorage);
+    const displayProjects = () => {
+        let projectStorage = getStorageProject();
+        const projectElement = document.querySelector(".project-page");
+        projectElement.textContent = '';
+        const projectHead = document.querySelector(".project-head");
 
-        // openProject(event, projectStorage, projectHead, project)
-        btn.addEventListener("click", (event) => openProject(event, projectStorage, projectHead, project));
-    });
-}
+        projectStorage.forEach((project, todo, id, todoInstance) => {
+            const btn = document.createElement("button");
+            btn.classList.add("project-btn");
+            btn.id = project.id;
+            btn.textContent = project.title || `Project ${id + 1}`;
+            projectElement.appendChild(btn);
+            const deleteBtn = document.createElement("button");
+            deleteBtn.classList.add("delete");
+            deleteBtn.textContent = "Delete";
+            projectElement.appendChild(deleteBtn);
+            todo = `project-${todo}`;
+            todoInstance = `project-${todoInstance}`;
+            //todoInstance = project.todoInstance;
+            console.log(projectStorage);
 
-export function storageTodo(todo) {
-    let todoStorage = JSON.parse(localStorage.getItem('todos')) || [];
-    todoStorage.push(todo);
-    localStorage.setItem('todos', JSON.stringify(todoStorage));
+            btn.addEventListener("click", (event) => openProject(event, projectStorage, projectHead, project));
+        });
+        
+    }
+
+    const storageTodo = (projectId, todoItem) => {
+        let projects = getStorageProject();
+
+        let project = projects.find(proj => proj.id === projectId);
+
+        if (project) {
+            project.todo.push(todoItem)
+            project.todoInstance = new Todo(project.todo);
+            localStorage.setItem('projects', JSON.stringify(projects));
+        }
+    }
+
+    return {AddToStorage, getStorageProject, displayProjects, storageTodo}
 }
 

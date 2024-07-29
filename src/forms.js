@@ -53,6 +53,7 @@ export function todoForm() {
 
     const form = createForm("todo-form");
     const fieldset = createFieldset();
+    fieldset.classList.add("todo-field");
     form.appendChild(fieldset);
     todoViewing.appendChild(form);
 
@@ -104,9 +105,9 @@ export function todoForm() {
         defaultTodo.style.display = "flex";
     });
 
-
-    const close = createButton("Close","closeBtn");
+    const close = createButton("X","closeBtn");
     fieldset.appendChild(close);
+
 
     close.addEventListener("click", () => {
         closeForm(form, todoBtn);

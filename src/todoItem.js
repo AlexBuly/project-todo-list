@@ -15,9 +15,19 @@ export default function Todo(todoItems) {
             const initialTitle = createDiv("element-title");
             todoElement.appendChild(initialTitle);
 
+            const del = createButton("Delete");
+            initialTitle.appendChild(del);
+
+            const edit = createButton("Edit");
+            initialTitle.appendChild(edit);
+
             const head = document.createElement("h2");
             head.textContent = item.title;
             initialTitle.appendChild(head);
+
+            const dueDateDiv = createDiv("dueDiv");
+            dueDateDiv.textContent = ` Due: ${item.dueDate}`;
+            initialTitle.appendChild(dueDateDiv);
 
             const toggleOpen = createButton("toggleOpen");
             toggleOpen.textContent = "+"
@@ -28,18 +38,15 @@ export default function Todo(todoItems) {
             initialTitle.appendChild(toggleClose);
 
             const description = createDiv("descriptionDiv");
-            const dueDateDiv = createDiv("dueDiv");
             const priorityDiv = createDiv("priorityDiv");
 
             const bottomElements = createDiv("todo-content");
             todoElement.appendChild(bottomElements);
             
-            description.textContent = item.description;
-            dueDateDiv.textContent = item.dueDate;
-            priorityDiv.textContent = item.priority;
+            description.textContent = `Description: ${item.description}`;
+            priorityDiv.textContent = `Priority: ${item.priority}`;
 
             bottomElements.appendChild(description);
-            bottomElements.appendChild(dueDateDiv);
             bottomElements.appendChild(priorityDiv);
 
             bottomElements.style.display = "none";
@@ -53,12 +60,12 @@ export default function Todo(todoItems) {
             })
 
             todoElement.style.backgroundColor =
-                priorityDiv.textContent == "High" ? "red" :
-                priorityDiv.textContent == "Medium" ? "yellow" :
-                priorityDiv.textContent == "Low" ? "green" : "";
+                priorityDiv.textContent == "Priority: High" ? "red" :
+                priorityDiv.textContent == "Priority: Medium" ? "yellow" :
+                priorityDiv.textContent == "Priority: Low" ? "green" : "";
 
             todoElement.style.color = 
-                priorityDiv.textContent == "High" || priorityDiv.textContent == "Low" ? "white" : "";
+                priorityDiv.textContent == "Priority: High" || priorityDiv.textContent == "Priority: Low" ? "white" : "";
 
         });
     }
