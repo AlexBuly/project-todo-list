@@ -1,16 +1,22 @@
-import { setProject } from "./arrays";
+import { setProject, getProject } from "./arrays";
+import { openProject } from "./openProject";
+import { createBreak, createButton, getTodoContainer } from "./DOMElements";
+import { getTodo } from "./addTodo";
+import Todo from "./todoItem";
+import Project from "./projects";
+
+let newTodo = getTodo();
 
 export function AddtoStorage(project) {
     let projectStorage = JSON.parse(localStorage.getItem('projects')) || [];
     projectStorage.push(project);
-    localStorage.setItem('projects', JSON.stringify(projectStorage));
+    localStorage.setItem('projects', JSON.stringify(projectStorage))
 }
 
 export function displayProjects() {
     const projectElement = document.querySelector(".project-page");
     projectElement.textContent = '';
-
-    let projectStorage = JSON.parse(localStorage.getItem('projects')) || [];
+    const projectHead = document.querySelector(".project-head");
 
     projectStorage.forEach((project, todo, id, todoInstance) => {
         const btn = document.createElement("button");
@@ -18,15 +24,23 @@ export function displayProjects() {
         btn.id = project.id;
         btn.textContent = project.title || `Project ${id + 1}`;
         projectElement.appendChild(btn);
+        const deleteBtn = document.createElement("button");
+        deleteBtn.classList.add("delete");
+        deleteBtn.textContent = "Delete";
+        projectElement.appendChild(deleteBtn);
         todo = `project-${todo}`;
-        todoInstance = `project-${todoInstance}`;
+        //todoInstance = `project-${todoInstance}`;
+        todoInstance = project.todoInstance;
         console.log(projectStorage);
 
-        btn.addEventListener("click", () => {
-            const projectHead = document.querySelector(".project-head");
-            setProject(projectStorage);
-            projectHead.textContent = project.title;
-        })
+        // openProject(event, projectStorage, projectHead, project)
+        btn.addEventListener("click", (event) => openProject(event, projectStorage, projectHead, project));
     });
+}
+
+export function storageTodo(todo) {
+    let todoStorage = JSON.parse(localStorage.getItem('todos')) || [];
+    todoStorage.push(todo);
+    localStorage.setItem('todos', JSON.stringify(todoStorage));
 }
 
