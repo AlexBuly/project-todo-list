@@ -1,11 +1,7 @@
-import { setProject, getProject } from "./arrays";
+import { getProject } from "./arrays";
 import { openProject } from "./openProject";
-import { createBreak, createButton, getTodoContainer } from "./DOMElements";
-import { getTodo } from "./addTodo";
 import Todo from "./todoItem";
-import Project from "./projects";
-import { projectElement } from "./projectElement";
-import { setCurrentProject } from "./arrays";
+import { deleteProject } from "./delete";
 
 export function LocalStorage() {
     const AddToStorage = (project) => {
@@ -27,40 +23,51 @@ export function LocalStorage() {
     }
 
     const displayProjects = () => {
+        const todos = document.querySelector(".todos");
         let projectStorage = getStorageProject();
         const projectElement = document.querySelector(".project-page");
         projectElement.textContent = '';
         const projectHead = document.querySelector(".project-head");
 
         projectStorage.forEach((project, todo, id, todoInstance) => {
-            const btn = document.createElement("button");
-            btn.classList.add("project-btn");
-            btn.id = project.id;
-            btn.textContent = project.title || `Project ${id + 1}`;
-            projectElement.appendChild(btn);
-            const deleteBtn = document.createElement("button");
-            deleteBtn.classList.add("delete");
-            deleteBtn.textContent = "Delete";
-            projectElement.appendChild(deleteBtn);
+            if (project.title) {
+                const btnDiv = document.createElement("div");
+                btnDiv.classList.add("btn-div");
+                btnDiv.style.width = "90%";
+                btnDiv.style.padding = "2%"
+                btnDiv.style.backgroundColor = "gray";
+                projectElement.appendChild(btnDiv);
+                const btn = document.createElement("button");
+                btn.classList.add("project-btn");
+                btn.id = project.id;
+                btn.textContent = project.title /*|| `Project ${id + 1}`;*/
+                btn.style.width = "100%";
+                btnDiv.appendChild(btn);
+                const deleteBtn = document.createElement("button");
+                const edit = document.createElement("button");
+                edit.classList.add("edit")
+                edit.textContent = "Edit";
+                btnDiv.appendChild(edit);
+                deleteBtn.classList.add("delete");
+                deleteBtn.textContent = "Delete";
+                btnDiv.appendChild(deleteBtn);
 
-            deleteBtn.addEventListener("click", () => {
-                btn.remove();
-                localStorage.removeItem("projects");
-            })
+                deleteBtn.addEventListener("click", () => {
+                    deleteProject(btnDiv, project.id);
+                    projectHead.textContent = "";
+                    todos.textContent = "";
+                })
 
             todo = `project-${todo}`;
             todoInstance = `project-${todoInstance}`;
             //todoInstance = project.todoInstance;
             console.log(projectStorage);
-            //const btn = projectElement();
 
-
-            btn.addEventListener("click", (event) => {
-                setCurrentProject(project.id);
-                openProject(event, projectStorage, projectHead, project);
-            });
+            btn.addEventListener("click", (event) => openProject(event, projectStorage, projectHead, project));
+            }
+                
         });
-        
+            
     }
 
     const storageTodo = (projectId, todoItem) => {
