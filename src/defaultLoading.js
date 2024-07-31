@@ -1,10 +1,6 @@
 import { createButton, createDiv, getTodoContainer} from "./DOMElements";
-import { defaultProject } from "./projectElement";
+import { setProject } from "./arrays";
 import { projectForm, todoForm } from "./forms";
-import Project from "./projects";
-import { getProject, AddProject, getTodos } from "./arrays";
-import { getI } from "./addProject";
-import { getTodo } from "./addTodo";
 import { LocalStorage } from "./addToStorage";
 
 export default function DefaultLoading() {
@@ -29,26 +25,12 @@ export default function DefaultLoading() {
     projectHeading.classList.add("project-head");
     todoViewing.appendChild(projectHeading);
 
+    const array = [];
+    setProject(array);
 
-    const clearStorage = createButton("Clear");
-    project.appendChild(clearStorage);
-    clearStorage.style.marginTop = "1em";
-
-    clearStorage.addEventListener("click", () => {
-      localStorage.clear();
-    })
-
-
-    //const todos = getTodos();
-
-    defaultProject();
     storage.displayProjects();
 
-
-
-    //const projectBtn = document.querySelector(".project-page");
-
-    const newProject = createButton("New Project", "create-project");
+    const newProject = createButton("+", "create-project");
     sideHeading.appendChild(newProject);
 
     newProject.addEventListener("click", () => {
@@ -66,32 +48,4 @@ export default function DefaultLoading() {
       todoContainer.style.display = "none";
       todoForm();
     });
-
-
-    //console.log(projectStorage.length);
-
-    
-    /*const defaultObj = {
-      title: todoTitle.textContent,
-      todos: todos,
-      id: "13"
-    }*/
-
-  //  AddProject(defaultObj);
-  
-  
-    
-  //   const projectObj = new Project(defaultObj.title, defaultObj.todos, defaultObj.id);
-  //   console.log(projectObj);
-
-    // const projectS = JSON.parse(localStorage.getItem('projects'));
-    
-    // for (let i = 0; i < projectS.length; i++) {
-    //   const button = document.createElement("button");
-    //   button.id = "project-btn";
-    //   button.textContent = projectS[i];
-    //   projectElement.appendChild(button);
-    // }  
-}
-
-//localStorage.clear();
+};

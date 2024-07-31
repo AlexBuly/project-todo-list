@@ -7,6 +7,11 @@ body {
     height: 100vh;
 }
 
+.form-title {
+    display: flex;
+    justify-content: right;
+}
+
 .project-page {
     display: flex;
     flex-direction: column;
@@ -44,6 +49,11 @@ body {
     align-items: center;
 }
 
+.todo-content { 
+    flex-direction: column;
+    margin: 0;
+}
+
 .side-heading {
    justify-content: center;
     display: grid;
@@ -53,6 +63,19 @@ body {
 .default-project, .project-element, .project-btn {
     width: 75%;
     font-size: 1em;
+}
+
+.btn-div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.edit, .delete {
+    grid-row: 2;
+}
+
+.project-btn {
+    grid-column: 1 / -1 ;
 }
 
 .default-project {

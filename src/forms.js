@@ -1,10 +1,7 @@
-import { createButton, createForm, createFieldset, createDiv, createLabel, createBreak, createInput, createOption, createSelect } from "./DOMElements";
+import { createButton, createForm, createFieldset, createLabel, createBreak, createInput, createOption, createSelect } from "./DOMElements";
 import closeForm from "./closeForm";
-import DefaultLoading from "./defaultLoading";
 import { addProject } from "./addProject";
 import addTodo from "./addTodo";
-import { projectElement } from "./projectElement";
-import { todoDisplay } from "./DOMElements";
 
 export function projectForm() {
     const projectList = document.querySelector(".projects");
@@ -56,6 +53,13 @@ export function todoForm() {
     form.appendChild(fieldset);
     todoViewing.appendChild(form);
 
+    const titleContainer = document.createElement("div");
+    titleContainer.classList.add("form-title");
+    fieldset.appendChild(titleContainer);
+
+     const close = createButton("X","closeBtn");
+     titleContainer.appendChild(close);
+
     const todoInput = createInput("text", "todoTitle", "todoTitle");
     const tLabel = createLabel("todoTitle", "Title:");
     const br = createBreak();
@@ -99,13 +103,9 @@ export function todoForm() {
     submit.addEventListener("click", (event) => {
         event.preventDefault();
         addTodo();
-        //todoDisplay();
         closeForm(form, todoBtn);
         defaultTodo.style.display = "flex";
     });
-
-    const close = createButton("X","closeBtn");
-    fieldset.appendChild(close);
 
 
     close.addEventListener("click", () => {

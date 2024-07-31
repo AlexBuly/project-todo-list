@@ -15,6 +15,6 @@ export function openProject(event, projArray, projectHead, projObj) {
     console.log(currProject);
 
     if (currProject && currProject.todoInstance) {
-        currProject.todoInstance.displayObjects();
+        currProject.todoInstance.displayTodos();
     } 
 }

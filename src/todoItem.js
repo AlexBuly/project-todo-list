@@ -1,10 +1,14 @@
 import { getTodoContainer, createButton, createDiv } from "./DOMElements";
-import { getTodo } from "./addTodo";
+import { deleteTodo } from "./delete";
+import { getProject } from "./arrays";
+
+const project = getProject();
+//const todo = project.todo;
 
 export default function Todo(todoItems) {
     this.todoItems = todoItems;
 
-    this.displayObjects = () => {
+    this.displayTodos = () => {
         const todoContainer = getTodoContainer();
         todoContainer.replaceChildren();
 
@@ -27,6 +31,11 @@ export default function Todo(todoItems) {
 
             const dueDateDiv = createDiv("dueDiv");
             dueDateDiv.textContent = ` Due: ${item.dueDate}`;
+
+            del.addEventListener("click", () => {
+                deleteTodo(todoElement, item.title);
+            });
+
             initialTitle.appendChild(dueDateDiv);
 
             const toggleOpen = createButton("toggleOpen");
@@ -52,7 +61,7 @@ export default function Todo(todoItems) {
             bottomElements.style.display = "none";
 
             toggleOpen.addEventListener("click", () => {
-                bottomElements.style.display = "block";;
+                bottomElements.style.display = "flex";
             });
 
             toggleClose.addEventListener("click", () => {

@@ -36,7 +36,7 @@ export default function addTodo() {
 
     setProject(currentProject); // Update the current project in the list of projects
     
-    newTodo.displayObjects(); // Display the updated list of todos
+    newTodo.displayTodos(); // Display the updated list of todos
     
     console.log(currentProject);
 

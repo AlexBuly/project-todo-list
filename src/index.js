@@ -1,8 +1,15 @@
 console.log("Test");
 import './style.css';
 import DefaultLoading from './defaultLoading';
+import { setProject } from './arrays';
 
 DefaultLoading();
+
+const array = [];
+setProject(array);
+
+
+
 
 //localStorage.clear();
 
