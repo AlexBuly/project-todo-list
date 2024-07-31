@@ -25,6 +25,17 @@ export default function DefaultLoading() {
     projectHeading.classList.add("project-head");
     todoViewing.appendChild(projectHeading);
 
+
+    const clearStorage = createButton("Clear Storage");
+    clearStorage.classList.add("clear");
+    project.appendChild(clearStorage);
+    clearStorage.style.marginTop = "1em";
+
+    clearStorage.addEventListener("click", () => {
+      localStorage.clear();
+      projectElement.textContent = "";
+    })
+
     const array = [];
     setProject(array);
 
