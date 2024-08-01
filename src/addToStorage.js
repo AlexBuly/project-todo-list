@@ -13,12 +13,10 @@ export function LocalStorage() {
 
     const getStorageProject = () => {
         let projectStorage = JSON.parse(localStorage.getItem('projects')) || [];
-        const currProject = getProject();
-        projectStorage.map(project => {
-            project.todoInstance = Object.assign(new Todo(project.todo), currProject.todoInstance);
+        projectStorage = projectStorage.map(project => {
+            project.todoInstance = new Todo(project.todo);
             return project;
         });
-
         return projectStorage;
     }
 
@@ -37,12 +35,14 @@ export function LocalStorage() {
                 btnDiv.style.padding = "2%"
                 btnDiv.style.backgroundColor = "gray";
                 projectElement.appendChild(btnDiv);
+
                 const btn = document.createElement("button");
                 btn.classList.add("project-btn");
                 btn.id = project.id;
-                btn.textContent = project.title /*|| `Project ${id + 1}`;*/
+                btn.textContent = project.title;
                 btn.style.width = "100%";
                 btnDiv.appendChild(btn);
+                
                 const deleteBtn = document.createElement("button");
                 const edit = document.createElement("button");
                 edit.classList.add("edit")
@@ -61,7 +61,6 @@ export function LocalStorage() {
             todo = `project-${todo}`;
             todoInstance = `project-${todoInstance}`;
             //todoInstance = project.todoInstance;
-            console.log(projectStorage);
 
             btn.addEventListener("click", (event) => openProject(event, projectStorage, projectHead, project));
             }
@@ -82,6 +81,6 @@ export function LocalStorage() {
         }
     }
 
-    return {AddToStorage, getStorageProject, displayProjects, storageTodo}
+    return {AddToStorage, getStorageProject, displayProjects, storageTodo }
 }
 

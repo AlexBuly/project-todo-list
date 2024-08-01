@@ -1,5 +1,8 @@
-import { getProject } from "./arrays";
+import { getProject, setProject } from "./arrays";
 import { LocalStorage } from "./addToStorage";
+import Todo from "./todoItem";
+import { getTodoContainer } from "./DOMElements";
+
 export function deleteProject(btn, projectId) {
     btn.remove();
     const storage = LocalStorage();
@@ -10,22 +13,28 @@ export function deleteProject(btn, projectId) {
     return projects;
     
 }
-export function deleteTodo(projectElement, todoItem) {
-    projectElement = projectElement.remove();
-    const projects = storage.getStorageProject();
-    const currentProject = getProject();
+
+export function deleteTodo(todoItem) {
+    const storage = LocalStorage();
+    let projects = storage.getStorageProject();
+    let currentProject = getProject();
 
     if (currentProject) {
-        const proj = currentProject.todo.find(item => item.title == todoItem);
-        //console.log(currentProject);
-        //delete proj;
-        //proj = {};
-        localStorage.setItem("projects", JSON.stringify(proj));
+        currentProject.todo = currentProject.todo.filter(todo => todo.title !== todoItem);
 
-        if (proj) {
-            return proj;
-        }
+        currentProject.todoInstance = new Todo(currentProject.todo);
+
+        projects = projects.map(project => {
+            if (project.id === currentProject.id) {
+                return currentProject;
+            }
+            return project;
+        });
+
+        localStorage.setItem('projects', JSON.stringify(projects));
+        setProject(currentProject);
+        currentProject.todoInstance.displayTodos();
+    
     }
-
     
 }
