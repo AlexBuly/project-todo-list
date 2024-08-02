@@ -94,16 +94,19 @@ export default function Todo(todoItems) {
                 toggleClose.textContent = "-"
                 initialTitle.appendChild(toggleClose);
 
-                const description = createDiv("descriptionDiv");
                 const priorityDiv = createDiv("priorityDiv");
 
                 const bottomElements = createDiv("todo-content");
                 todoElement.appendChild(bottomElements);
                 
-                description.textContent = `Description: ${item.description}`;
+                if (item.description) {
+                    const description = createDiv("descriptionDiv");
+                    description.textContent = `Description: ${item.description}`;
+                    bottomElements.appendChild(description);
+                }
+                
                 priorityDiv.textContent = `Priority: ${item.priority}`;
 
-                bottomElements.appendChild(description);
                 bottomElements.appendChild(priorityDiv);
 
                 bottomElements.style.display = "none";

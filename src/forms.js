@@ -27,9 +27,14 @@ export function projectForm() {
 
     post.addEventListener("click", (event) => {
         event.preventDefault();
-        addProject();
-        closeForm(form, newProject);
-        projectPage.style.display = "flex";
+        if (titleInput.value === "") {
+            alert("Title required.");
+        } else {
+            addProject();
+            closeForm(form, newProject);
+            projectPage.style.display = "flex";
+        }
+    
     });
 
     const close = createButton("Close", "close-element");
@@ -102,9 +107,15 @@ export function todoForm() {
 
     submit.addEventListener("click", (event) => {
         event.preventDefault();
-        addTodo();
-        closeForm(form, todoBtn);
-        defaultTodo.style.display = "flex";
+        if (todoInput.value === "") {
+            alert("Title required.");
+        } else if (dueDate.value === "") {
+            alert("Date required.")
+        } else {
+            addTodo();
+            closeForm(form, todoBtn);
+            defaultTodo.style.display = "flex";
+        }
     });
 
 

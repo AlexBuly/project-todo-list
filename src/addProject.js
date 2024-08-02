@@ -12,10 +12,6 @@ export function addProject() {
     const titleValue = document.querySelector("#title").value;
     const storage = LocalStorage();
 
-    if (titleValue === "") {
-        alert("Title required");
-    }
-
     let project = [];
 
     setProject(project);

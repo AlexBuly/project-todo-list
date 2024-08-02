@@ -40,14 +40,18 @@ export const formProject = (projectId) => {
     fieldset.appendChild(post);
 
     post.addEventListener("click", (event) => {
-        const newProject = document.querySelector(".create-project");
-        const projectElement = document.querySelector(".project-page");
-        event.preventDefault();
-        closeForm(form, newProject);
-        if (newTitle) {
-            editProject(project.id, newTitle.value);
-            projectElement.style.display = "flex";
-        } 
+        if (newTitle.value === "") {
+            alert("Title required.")
+        } else {
+            const newProject = document.querySelector(".create-project");
+            const projectElement = document.querySelector(".project-page");
+            event.preventDefault();
+            closeForm(form, newProject);
+            if (newTitle) {
+                editProject(project.id, newTitle.value);
+                projectElement.style.display = "flex";
+            }   
+        }
     });
 }
 
@@ -141,18 +145,24 @@ export function editTodoForm(todoTitle) {
 
     submit.addEventListener("click", (event) => {
         event.preventDefault();
-        closeForm(form, todoBtn);
+        if (todoInput.value === "") {
+            alert("Title required.");
+        } else if (dueDate.value === "") {
+            alert("Date required.")
+        } else {
+            closeForm(form, todoBtn);
 
-        if (todoInput && desInput && dueDate && priority) {
-            const newDetails = {
-                title: todoInput.value,
-                description: desInput.value,
-                dueDate: dueDate.value,
-                priority: priority.value,
-                completed: todo.completed
+            if (todoInput && desInput && dueDate && priority) {
+                const newDetails = {
+                    title: todoInput.value,
+                    description: desInput.value,
+                    dueDate: dueDate.value,
+                    priority: priority.value,
+                    completed: todo.completed
+                }
+                editTodo(todo.title, newDetails);
+                defaultTodo.style.display = "flex";
             }
-            editTodo(todo.title, newDetails);
-            defaultTodo.style.display = "flex";
         }
     });
 
