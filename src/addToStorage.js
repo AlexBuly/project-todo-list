@@ -2,6 +2,7 @@ import { getProject } from "./arrays";
 import { openProject } from "./openProject";
 import Todo from "./todoItem";
 import { deleteProject } from "./delete";
+import { formProject } from "./edit";
 
 export function LocalStorage() {
     const AddToStorage = (project) => {
@@ -29,6 +30,7 @@ export function LocalStorage() {
 
         projectStorage.forEach((project, todo, id, todoInstance) => {
             if (project.title) {
+                //const projectEdit = editProject(project.id)
                 const btnDiv = document.createElement("div");
                 btnDiv.classList.add("btn-div");
                 btnDiv.style.width = "90%";
@@ -44,13 +46,21 @@ export function LocalStorage() {
                 btnDiv.appendChild(btn);
                 
                 const deleteBtn = document.createElement("button");
-                const edit = document.createElement("button");
-                edit.classList.add("edit")
-                edit.textContent = "Edit";
-                btnDiv.appendChild(edit);
                 deleteBtn.classList.add("delete");
                 deleteBtn.textContent = "Delete";
                 btnDiv.appendChild(deleteBtn);
+
+                const edit = document.createElement("button");
+                edit.classList.add("edit")
+                edit.textContent = "Edit";
+                
+                edit.addEventListener("click", () => {
+                    projectElement.style.display = "none";
+                    formProject(project.id);
+
+                });
+
+                btnDiv.appendChild(edit);
 
                 deleteBtn.addEventListener("click", () => {
                     deleteProject(btnDiv, project.id);
