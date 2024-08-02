@@ -31,17 +31,12 @@ export default function DefaultLoading() {
     project.appendChild(clearStorage);
     clearStorage.style.marginTop = "1em";
 
-    clearStorage.addEventListener("click", () => {
-      localStorage.clear();
-      projectElement.textContent = "";
-    })
-
     const array = [];
     setProject(array);
 
     storage.displayProjects();
 
-    const newProject = createButton("+", "create-project");
+    const newProject = createButton("New Project", "create-project");
     sideHeading.appendChild(newProject);
 
     newProject.addEventListener("click", () => {
@@ -51,6 +46,15 @@ export default function DefaultLoading() {
 
     const todoBtn = createButton("New Todo", "new-todo");
     todoViewing.appendChild(todoBtn);
+    todoBtn.style.display = "none";
+    
+
+    clearStorage.addEventListener("click", () => {
+      localStorage.clear();
+      projectElement.textContent = "";
+      projectHeading.textContent = "";
+      todoBtn.style.display = "none"
+    })
 
     const todoContainer = getTodoContainer();
     todoViewing.appendChild(todoContainer);

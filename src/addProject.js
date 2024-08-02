@@ -12,6 +12,10 @@ export function addProject() {
     const titleValue = document.querySelector("#title").value;
     const storage = LocalStorage();
 
+    if (titleValue === "") {
+        alert("Title required");
+    }
+
     let project = [];
 
     setProject(project);
@@ -25,14 +29,9 @@ export function addProject() {
         todoInstance: new Todo(todoArray)   
     }
 
-    //AddtoStorage(prjObj);
     project.push(prjObj);
     storage.AddToStorage(prjObj);
     storage.displayProjects();
-    
-    //AddtoStorage(prjObj);
-
-   //localStorage.setItem("project", JSON.stringify(project));
 
     newProject = new Project(prjObj.title, prjObj.todo, prjObj.id);
     console.log(newProject);

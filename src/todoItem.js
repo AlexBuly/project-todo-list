@@ -1,10 +1,11 @@
-import { getTodoContainer, createButton, createDiv } from "./DOMElements";
+import { getTodoContainer, createButton, createDiv, createFieldset, createForm } from "./DOMElements";
 import { deleteTodo } from "./delete";
 import { getProject } from "./arrays";
 import { LocalStorage } from "./addToStorage";
+import { editTodoForm } from "./edit";
 
 const project = getProject();
-//const todo = project.todo;
+
 
 export default function Todo(todoItems) {
     this.todoItems = todoItems;
@@ -22,6 +23,13 @@ export default function Todo(todoItems) {
 
                 const initialTitle = createDiv("element-title");
                 todoElement.appendChild(initialTitle);
+
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.name = "checklist";
+                checkbox.id = "checklist";
+                checkbox.checked = item.completed || false;
+                initialTitle.appendChild(checkbox);
 
                 const del = createButton("Delete");
                 initialTitle.appendChild(del);
@@ -67,6 +75,13 @@ export default function Todo(todoItems) {
                         deleteTodo(item.title);
                         todoElement.remove();
                    })
+
+                  no.addEventListener("click", () => {
+                    del.style.display = "block";
+                    edit.style.display = "block";
+                    confimDel.style.display = "none";
+
+                  })
                 });
 
                 initialTitle.appendChild(dueDateDiv);
@@ -108,6 +123,20 @@ export default function Todo(todoItems) {
 
                 todoElement.style.color = 
                     priorityDiv.textContent == "Priority: High" || priorityDiv.textContent == "Priority: Low" ? "white" : "";
+
+                checkbox.addEventListener("click", () => {
+                    item.completed = checkbox.checked;
+                    const storage = LocalStorage();
+                    storage.updateTodoItem(item);
+                })
+
+
+
+                edit.addEventListener("click", () => {
+                    todoElement.style.display = "none";
+                    editTodoForm(item.title);
+                 });
+ 
 
                 console.log(storageProject);
             }

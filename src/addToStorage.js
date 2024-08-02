@@ -21,6 +21,16 @@ export function LocalStorage() {
         return projectStorage;
     }
 
+    const saveProjects = (projects) => {
+        localStorage.setItem('projects', JSON.stringify(projects));
+    };
+
+    const updateProject = (projectId, updatedProject) => {
+        let projects = getStorageProject();
+        projects = projects.map(proj => proj.id === projectId ? updatedProject : proj);
+        saveProjects(projects);
+    };
+
     const displayProjects = () => {
         const todos = document.querySelector(".todos");
         let projectStorage = getStorageProject();
@@ -65,7 +75,6 @@ export function LocalStorage() {
                 deleteBtn.addEventListener("click", () => {
                     deleteProject(btnDiv, project.id);
                     projectHead.textContent = "";
-                    todos.textContent = "";
                 })
 
             todo = `project-${todo}`;
@@ -87,10 +96,20 @@ export function LocalStorage() {
         if (project) {
             project.todo.push(todoItem)
             project.todoInstance = new Todo(project.todo);
-            localStorage.setItem('projects', JSON.stringify(projects));
+            saveProjects(projects);
         }
     }
 
-    return {AddToStorage, getStorageProject, displayProjects, storageTodo }
+    const updateTodoItem = (updatedItem) => {
+        let projects = getStorageProject();
+        projects.forEach(project => {
+            project.todo = project.todo.map(todo => todo.title === updatedItem.title ? updatedItem : todo);
+            project.todoInstance = new Todo(project.todo);
+        })
+
+        saveProjects(projects);
+    }
+
+    return {AddToStorage, getStorageProject, displayProjects, storageTodo, updateTodoItem, saveProjects, updateProject }
 }
 

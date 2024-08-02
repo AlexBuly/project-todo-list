@@ -9,7 +9,7 @@ export function deleteProject(btn, projectId) {
     const projects = storage.getStorageProject();
     let project = projects.find(proj => proj.id === projectId);
     Object.keys(project).forEach(key => delete project[key]);
-    localStorage.setItem("projects", JSON.stringify(projects));
+    storage.saveProjects(projects);
     return projects;
     
 }
@@ -30,8 +30,7 @@ export function deleteTodo(todoItem) {
             }
             return project;
         });
-
-        localStorage.setItem('projects', JSON.stringify(projects));
+        storage.saveProjects(projects);
         setProject(currentProject);
         currentProject.todoInstance.displayTodos();
     

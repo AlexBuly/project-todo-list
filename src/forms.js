@@ -8,7 +8,7 @@ export function projectForm() {
     const newProject = document.querySelector(".create-project");
     const projectPage = document.querySelector(".project-page");
     newProject.style.visibility = "hidden";
-
+   
     const form = createForm("project-form");
     const fieldset = createFieldset();
     form.appendChild(fieldset);
@@ -76,7 +76,7 @@ export function todoForm() {
     fieldset.appendChild(br.cloneNode());
 
     const dueDate = createInput("date", "due-date", "due-date");
-    const dueLabel = createLabel("due-date", "Due date:")
+    const dueLabel = createLabel("due-date", "Due date:");
 
     fieldset.appendChild(dueLabel);
     fieldset.appendChild(dueDate);

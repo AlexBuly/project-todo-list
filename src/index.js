@@ -9,8 +9,6 @@ const array = [];
 setProject(array);
 
 
-
-
 //localStorage.clear();
 
 //console.log(projectObj());

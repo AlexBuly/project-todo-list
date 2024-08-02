@@ -23,14 +23,10 @@ export default function addTodo() {
     }
 
     currentProject.todo.push(todoObj); // Add the new todo to the current project
-    //storageTodo(todoObj);
     storage.storageTodo(currentProject.id, todoObj);
 
 
     newTodo = new Todo(currentProject.todo); // Create a new Todo instance with updated todos
-    //localStorage.setItem("myTodos", JSON.stringify(newTodo));
-    
-    //localStorage.setItem('items', JSON.stringify(todoArray));
 
     console.log(newTodo);
 
