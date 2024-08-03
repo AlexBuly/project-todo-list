@@ -36,7 +36,8 @@ export default function DefaultLoading() {
 
     storage.displayProjects();
 
-    const newProject = createButton("New Project", "create-project");
+    const newProject = createButton("+", "create-project");
+    newProject.setAttribute("data-tooltip", "New Project");
     sideHeading.appendChild(newProject);
 
     newProject.addEventListener("click", () => {
@@ -44,7 +45,8 @@ export default function DefaultLoading() {
       projectForm();
     })
 
-    const todoBtn = createButton("New Todo", "new-todo");
+    const todoBtn = createButton("+", "new-todo");
+    todoBtn.setAttribute("data-tooltip", "New Todo");
     todoViewing.appendChild(todoBtn);
     todoBtn.style.display = "none";
     

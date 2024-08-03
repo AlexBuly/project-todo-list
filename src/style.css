@@ -12,13 +12,86 @@ body {
     justify-content: right;
 }
 
-.project-page {
+.projects {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1em;
 }
 
+.side-heading {
+    align-items: center;
+}
+
+.create-project {
+    position: relative;
+}
+
+.create-project::before, 
+.create-project::after {
+    scale: 0;
+    position: absolute;
+    top: -.25rem;
+    left: 119%;
+}
+
+.create-project::before {
+    content: attr(data-tooltip);
+    color: white;
+    padding: .3rem;
+    border-radius: .3rem;
+    text-align: center;
+    width: max-content;
+    max-width: 100%;
+    background: #333;
+}
+
+.create-project:hover::before,
+.create-project:hover::after {
+    scale: 1;
+}
+
+.create-project::after {
+    transform: translateX(-20px) translateY(1px);
+    content: '';
+    border: 11px solid transparent;
+    border-right-color: #333;
+}
+
+.new-todo {
+    position: relative;
+}
+
+.new-todo::before, 
+.new-todo::after {
+    scale: 0;
+    position: absolute;
+    top: -.25rem;
+    left: 175%;
+}
+
+.new-todo::before {
+    content: attr(data-tooltip);
+    color: white;
+    padding: .3rem;
+    border-radius: .3rem;
+    text-align: center;
+    width: max-content;
+    max-width: 299%;
+    background: #333;
+}
+
+.new-todo:hover::before,
+.new-todo:hover::after {
+    scale: 1;
+}
+
+.new-todo::after {
+    transform: translateX(-20px) translateY(1px);
+    content: '';
+    border: 11px solid transparent;
+    border-right-color: #333;
+}
 
 .main-container {
     display: grid;
@@ -79,6 +152,21 @@ body {
 
 .edit, .delete {
     grid-row: 2;
+}
+
+.descriptionDiv {
+   display: flex;
+   gap: 1em;
+   margin-left: 1em;
+   align-items: center;
+   
+}
+
+.priorityDiv {
+    display: flex;
+    gap: 1em;
+    margin-left: 1em;
+    align-items: center;
 }
 
 .project-btn {
