@@ -2,10 +2,8 @@ import { getProject, setProject } from "./arrays";
 import Todo from "./todoItem";
 import { LocalStorage } from "./addToStorage";
 
-let newTodo;
-let todoArray;
-
 export default function addTodo() {
+    let newTodo;
     const todoInput = document.querySelector("#todoTitle").value;
     const desInput = document.querySelector("#description").value;
     const dueDate = document.querySelector("#due-date").value;
@@ -28,19 +26,9 @@ export default function addTodo() {
 
     newTodo = new Todo(currentProject.todo); // Create a new Todo instance with updated todos
 
-    console.log(newTodo);
-
     setProject(currentProject); // Update the current project in the list of projects
     
     newTodo.displayTodos(); // Display the updated list of todos
 
     return newTodo;
-}
-
-export function getTodo() {
-    return newTodo;
-}
-
-export function getTodoArray() {
-    return todoArray;
 }

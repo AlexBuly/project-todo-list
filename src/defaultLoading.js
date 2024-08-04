@@ -29,7 +29,6 @@ export default function DefaultLoading() {
     const clearStorage = createButton("Clear Storage");
     clearStorage.classList.add("clear");
     project.appendChild(clearStorage);
-    clearStorage.style.marginTop = "1em";
 
     const array = [];
     setProject(array);
