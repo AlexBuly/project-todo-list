@@ -11,7 +11,6 @@ export function editProject(projectId, newTitle) {
 
     if (project) {
         project.title = newTitle;
-        //localStorage.setItem("projects", JSON.stringify(projects));
         storage.saveProjects(projects);
         storage.displayProjects();
     }  
@@ -22,11 +21,19 @@ export const formProject = (projectId) => {
     const projects = storage.getStorageProject();
     let project = projects.find(proj => proj.id === projectId);
     const projectList = document.querySelector(".projects");
+    const projectPage = document.querySelector(".project-page")
     const form = createForm(".edit-form");
     const fieldset = createFieldset();
+    fieldset.classList.add("edit-projectForm");
     form.appendChild(fieldset);
     projectList.appendChild(form);
     const br = createBreak();
+    const newProject = document.querySelector(".create-project");
+    newProject.style.visibility = "hidden";
+
+    const titleContainer = document.createElement("div");
+    titleContainer.classList.add("form-title");
+    fieldset.appendChild(titleContainer);
 
     const newTitle = createInput("text", "title-edit", "title-edit");
     newTitle.value = project.title;
@@ -35,6 +42,15 @@ export const formProject = (projectId) => {
     fieldset.appendChild(tLabel);
     fieldset.appendChild(newTitle);
     fieldset.appendChild(br);
+
+    const close = createButton("X","closeBtn");
+    close.setAttribute("data-tooltip", "Close");
+    titleContainer.appendChild(close);
+
+    close.addEventListener("click", () => {
+        projectPage.style.display = "flex";
+        closeForm(form, newProject)
+    })
 
     const post = createButton("Submit", "project-submit");
     fieldset.appendChild(post);
@@ -66,11 +82,7 @@ export function editTodo(todoTitle, newItems) {
         todo.dueDate = newItems.dueDate;
         todo.priority = newItems.priority;
         todo.completed = newItems.completed;
-
-        console.log(currentProject.todo);
-
         const newTodo = new Todo(currentProject.todo);
-
         storage.updateProject(currentProject.id, currentProject);
         storage.displayProjects();
         newTodo.displayTodos();
@@ -88,6 +100,7 @@ export function editTodoForm(todoTitle) {
     
     const form = createForm(".edit-formT");
     const fieldset = createFieldset();
+    fieldset.classList.add("edit-todoForm")
     form.appendChild(fieldset);
     todoViewing.appendChild(form);
     const br = createBreak();
@@ -96,7 +109,8 @@ export function editTodoForm(todoTitle) {
     titleContainer.classList.add("form-title");
     fieldset.appendChild(titleContainer);
 
-    const close = createButton("X","closeBtn");
+    const close = createButton("X","close-tedit");
+    close.setAttribute("data-tooltip", "Close")
     titleContainer.appendChild(close);
 
     const todoInput = createInput("text", "editTitle", "editTitle");

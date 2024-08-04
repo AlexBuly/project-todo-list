@@ -30,22 +30,5 @@ export function addProject() {
     storage.displayProjects();
 
     newProject = new Project(prjObj.title, prjObj.todo, prjObj.id);
-    console.log(newProject);
-}
-
-export function projectObj() {
-    return newProject;
-}
-
-export function getArray() {
-    return todoArray;
-}
-
-export function getId() {
-    return date;
-}
-
-export function getObject() {
-    return prjObj;
 }
 

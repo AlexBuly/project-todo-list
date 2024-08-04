@@ -11,9 +11,15 @@ export function projectForm() {
    
     const form = createForm("project-form");
     const fieldset = createFieldset();
+    fieldset.classList.add("form");
     form.appendChild(fieldset);
     projectList.appendChild(form);
     const br = createBreak();
+
+    const titleContainer = document.createElement("div");
+    titleContainer.classList.add("form-title");
+    fieldset.appendChild(titleContainer);
+
 
     const titleInput = createInput("text", "title", "title");
     const tLabel = createLabel("title", "Title:");
@@ -37,8 +43,9 @@ export function projectForm() {
     
     });
 
-    const close = createButton("Close", "close-element");
-    fieldset.appendChild(close);
+    const close = createButton("X", "close-element");
+    close.setAttribute("data-tooltip", "Close");
+    titleContainer.appendChild(close);
 
     close.addEventListener("click", () => {
         closeForm(form, newProject);
@@ -63,6 +70,7 @@ export function todoForm() {
     fieldset.appendChild(titleContainer);
 
      const close = createButton("X","closeBtn");
+     close.setAttribute("data-tooltip", "Close");
      titleContainer.appendChild(close);
 
     const todoInput = createInput("text", "todoTitle", "todoTitle");

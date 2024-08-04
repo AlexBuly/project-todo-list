@@ -74,7 +74,7 @@ export default function Todo(todoItems) {
                    yes.addEventListener("click", () => {
                         deleteTodo(item.title);
                         todoElement.remove();
-                   })
+                   });
 
                   no.addEventListener("click", () => {
                     del.style.display = "block";
@@ -94,20 +94,30 @@ export default function Todo(todoItems) {
                 toggleClose.textContent = "-"
                 initialTitle.appendChild(toggleClose);
 
-                const priorityDiv = createDiv("priorityDiv");
-
                 const bottomElements = createDiv("todo-content");
                 todoElement.appendChild(bottomElements);
                 
                 if (item.description) {
                     const description = createDiv("descriptionDiv");
-                    description.textContent = `Description: ${item.description}`;
+                    const desTitle = document.createElement("h3");
+                    desTitle.classList.add("description-title");
+                    desTitle.textContent = "Description:"
+                    description.appendChild(desTitle);
+                    const desText = createDiv("description-text");
+                    desText.textContent = item.description;
+                    description.appendChild(desText);
                     bottomElements.appendChild(description);
                 }
                 
-                priorityDiv.textContent = `Priority: ${item.priority}`;
-
+                const priorityDiv = createDiv("priorityDiv");
                 bottomElements.appendChild(priorityDiv);
+                const priorityTitle = document.createElement("h3");
+                priorityTitle.classList.add("priority-title")
+                priorityTitle.textContent = "Priority:"
+                priorityDiv.appendChild(priorityTitle)
+                const priorityText = createDiv("priority-text");
+                priorityText.textContent = item.priority;
+                priorityDiv.appendChild(priorityText);
 
                 bottomElements.style.display = "none";
 
@@ -120,18 +130,18 @@ export default function Todo(todoItems) {
                 })
 
                 todoElement.style.backgroundColor =
-                    priorityDiv.textContent == "Priority: High" ? "red" :
-                    priorityDiv.textContent == "Priority: Medium" ? "yellow" :
-                    priorityDiv.textContent == "Priority: Low" ? "green" : "";
+                    priorityText.textContent == "High" ? "#ea2a2a" :
+                    priorityText.textContent == "Medium" ? "yellow" :
+                    priorityText.textContent == "Low" ? "green" : "";
 
                 todoElement.style.color = 
-                    priorityDiv.textContent == "Priority: High" || priorityDiv.textContent == "Priority: Low" ? "white" : "";
+                    priorityText.textContent == "High" || priorityText.textContent == "Low" ? "white" : "";
 
-                checkbox.addEventListener("click", () => {
+                checkbox.addEventListener("change", () => {
                     item.completed = checkbox.checked;
                     const storage = LocalStorage();
                     storage.updateTodoItem(item);
-                })
+                });
 
 
 
@@ -140,8 +150,6 @@ export default function Todo(todoItems) {
                     editTodoForm(item.title);
                  });
  
-
-                console.log(storageProject);
             }
             
 

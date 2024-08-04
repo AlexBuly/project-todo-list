@@ -1,7 +1,6 @@
 import { getProject, setProject } from "./arrays";
 import { LocalStorage } from "./addToStorage";
 import Todo from "./todoItem";
-import { getTodoContainer } from "./DOMElements";
 
 export function deleteProject(btn, projectId) {
     btn.remove();
@@ -10,8 +9,7 @@ export function deleteProject(btn, projectId) {
     let project = projects.find(proj => proj.id === projectId);
     Object.keys(project).forEach(key => delete project[key]);
     storage.saveProjects(projects);
-    return projects;
-    
+    return projects;  
 }
 
 export function deleteTodo(todoItem) {

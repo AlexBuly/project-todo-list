@@ -1,4 +1,3 @@
-import { getProject } from "./arrays";
 import { openProject } from "./openProject";
 import Todo from "./todoItem";
 import { deleteProject } from "./delete";
@@ -32,20 +31,15 @@ export function LocalStorage() {
     };
 
     const displayProjects = () => {
-        const todos = document.querySelector(".todos");
         let projectStorage = getStorageProject();
         const projectElement = document.querySelector(".project-page");
         projectElement.textContent = '';
         const projectHead = document.querySelector(".project-head");
 
-        projectStorage.forEach((project, todo, id, todoInstance) => {
+        projectStorage.forEach((project, todo, todoInstance) => {
             if (project.title) {
-                //const projectEdit = editProject(project.id)
                 const btnDiv = document.createElement("div");
                 btnDiv.classList.add("btn-div");
-                btnDiv.style.width = "90%";
-                btnDiv.style.padding = "2%"
-                btnDiv.style.backgroundColor = "gray";
                 projectElement.appendChild(btnDiv);
 
                 const btn = document.createElement("button");
@@ -59,10 +53,32 @@ export function LocalStorage() {
                 deleteBtn.classList.add("delete");
                 deleteBtn.textContent = "Delete";
                 btnDiv.appendChild(deleteBtn);
+                
 
                 const edit = document.createElement("button");
                 edit.classList.add("edit")
                 edit.textContent = "Edit";
+
+                const comfirmDel = document.createElement("div");
+                comfirmDel.classList.add("delProj");
+                btnDiv.appendChild(comfirmDel);
+                comfirmDel.style.display = "none";
+
+                const comfirmText = document.createElement("div");
+                comfirmText.textContent = "Delete Project?";
+                comfirmDel.appendChild(comfirmText);
+
+                const yes = document.createElement("button");
+                yes.classList.add("yes");
+                yes.textContent = "Yes";
+                comfirmDel.appendChild(yes);
+
+                const no = document.createElement("button");
+                no.textContent = "No";
+                no.classList.add("no");
+                comfirmDel.appendChild(no);
+
+
                 
                 edit.addEventListener("click", () => {
                     projectElement.style.display = "none";
@@ -73,13 +89,24 @@ export function LocalStorage() {
                 btnDiv.appendChild(edit);
 
                 deleteBtn.addEventListener("click", () => {
-                    deleteProject(btnDiv, project.id);
-                    projectHead.textContent = "";
+                    deleteBtn.style.display = "none";
+                    edit.style.display = "none";
+                    comfirmDel.style.display = "grid";
+
+                    yes.addEventListener("click", () => {
+                        deleteProject(btnDiv, project.id);
+                        projectHead.textContent = "";
+                    });
+
+                    no.addEventListener("click", () => {
+                        deleteBtn.style.display = "block";
+                        edit.style.display = "block";
+                        comfirmDel.style.display = "none";
+                    });
                 })
 
             todo = `project-${todo}`;
             todoInstance = `project-${todoInstance}`;
-            //todoInstance = project.todoInstance;
 
             btn.addEventListener("click", (event) => openProject(event, projectStorage, projectHead, project));
             }

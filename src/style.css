@@ -2,6 +2,18 @@
     box-sizing: border-box;
 }
 
+:root {
+    --closeBackground: coral;
+    --tool-tipBackground: #333;
+    --submitBackground: lightskyblue;
+    --whiteBtnHover: rgb(219, 219, 219);
+    --whiteBtnActive: rgb(202, 199, 199);
+    --submitHover: rgb(108, 178, 221);
+    --submitActive: rgb(93, 154, 192);
+    --closeHover: rgb(223, 111, 71);
+    --closeActive: rgb(179, 89, 56); 
+}
+
 body {
     margin: 0;
     height: 100vh;
@@ -12,11 +24,28 @@ body {
     justify-content: right;
 }
 
-.projects {
+.project-page {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1em;
+    width: 100%;
+}
+
+.project-page button:hover,
+.todo-element button:hover,
+.yes:hover,
+.no:hover,
+.new-todo:hover {
+    background-color: var(--whiteBtnHover);
+}
+
+.project-page button:active,
+.todo-element button:active,
+.yes:active,
+.no:active,
+.new-todo:active {
+    background-color: var(--whiteBtnActive);
 }
 
 .side-heading {
@@ -25,6 +54,8 @@ body {
 
 .create-project {
     position: relative;
+    background-color: lightgrey;
+    border-radius: 1em;
 }
 
 .create-project::before, 
@@ -43,7 +74,7 @@ body {
     text-align: center;
     width: max-content;
     max-width: 100%;
-    background: #333;
+    background: var(--tool-tipBackground);
 }
 
 .create-project:hover::before,
@@ -55,7 +86,120 @@ body {
     transform: translateX(-20px) translateY(1px);
     content: '';
     border: 11px solid transparent;
-    border-right-color: #333;
+    border-right-color: var(--tool-tipBackground);
+}
+
+.todo-field, .edit-todoForm, .form, .edit-projectForm {
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.5em;
+    border: 2px solid black;
+    padding: 0.5rem;
+
+}
+
+.closeBtn::before,
+.closeBtn::after {
+    scale: 0;
+    position: absolute;
+    top: -.25rem;
+    left: 175%;
+}
+
+form {
+    margin: 0;
+    background-color: white;
+}
+
+.closeBtn:before {
+    content: attr(data-tooltip);
+    color: white;
+    padding: .3rem;
+    border-radius: .3rem;
+    text-align: center;
+    width: max-content;
+    max-width: 160%;
+    background: #333;
+}
+
+.closeBtn:hover::before,
+.closeBtn:hover::after {
+    scale: 1;
+}
+
+.closeBtn::after {
+    transform: translateX(-21px) translateY(1px);
+    content: '';
+    border: 11px solid transparent;
+    border-right-color: var(--tool-tipBackground);
+}
+
+.close-element,
+.closeBtn,
+.close-tedit {
+    position: relative;
+    background-color: var(--closeBackground);
+    margin: 1em;
+    color: white;
+    margin: 0;
+}
+
+.close-element:hover, 
+.closeBtn:hover, 
+.close-tedit:hover {
+    background-color: var(--closeHover)
+}
+
+.close-element:active,
+.closeBtn:active,
+.close-tedit:active {
+   background-color: var(--closeActive);
+}
+
+.close-element::before, 
+.close-element::after {
+    scale: 0;
+    position: absolute;
+    top: -.25rem;
+    left: 175%;
+}
+
+.close-element::before {
+    content: attr(data-tooltip);
+    color: white;
+    padding: .3rem;
+    border-radius: .3rem;
+    text-align: center;
+    width: max-content;
+    max-width: 160%;
+    background: var(--tool-tipBackground);
+}
+
+.close-element:hover::before,
+.close-element:hover::after {
+    scale: 1;
+}
+
+.close-element::after {
+    transform: translateX(-21px) translateY(1.5px);
+    content: '';
+    border: 11px solid transparent;
+    border-right-color: var(--tool-tipBackground);
+}
+
+.form label {
+    grid-column: 1;
+    align-items: center;
+}
+
+.form-title {
+    grid-column: 3;
+
+}
+
+.project-submit {
+    margin-top: 0.5em;
 }
 
 .new-todo {
@@ -78,7 +222,7 @@ body {
     text-align: center;
     width: max-content;
     max-width: 299%;
-    background: #333;
+    background: var(--tool-tipBackground);
 }
 
 .new-todo:hover::before,
@@ -90,7 +234,38 @@ body {
     transform: translateX(-20px) translateY(1px);
     content: '';
     border: 11px solid transparent;
-    border-right-color: #333;
+    border-right-color: var(--tool-tipBackground);
+}
+
+.close-tedit::before, 
+.close-tedit::after {
+    scale: 0;
+    position: absolute;
+    top: -.25rem;
+    left: 175%;
+}
+
+.close-tedit::before {
+    content: attr(data-tooltip);
+    color: white;
+    padding: .3rem;
+    border-radius: .3rem;
+    text-align: center;
+    width: max-content;
+    max-width: 299%;
+    background: var(--tool-tipBackground);
+}
+
+.close-tedit:hover::before,
+.close-tedit:hover::after {
+    scale: 1;
+}
+
+.close-tedit::after {
+    transform: translateX(-20px) translateY(1px);
+    content: '';
+    border: 11px solid transparent;
+    border-right-color: var(--tool-tipBackground); 
 }
 
 .main-container {
@@ -108,10 +283,28 @@ body {
     gap: 1em;
 }
 
+.todo-btn, .edit-todo, .project-submit {
+    grid-column: 2;
+    width: 50%;
+    border-radius: 1em;
+    margin-left: 1.5em;
+    margin-bottom: 0.5em;
+    background-color: var(--submitBackground);
+}
+
+.todo-btn:hover, .edit-todo:hover, .project-submit:hover {
+    background-color: var(--submitHover)
+}
+
+.todo-btn:active, .edit-todo:active, .project-submit:active {
+    background-color: var(--submitActive)
+}
+
 .todo-element {
     display: grid;
     width: 80%;
     border-radius: 1em;
+    border: 2px solid black;
 }
 
 .todo-container {
@@ -127,15 +320,19 @@ body {
     margin: 0;
 }
 
-.side-heading {
-   justify-content: center;
+.side-heading { 
     display: grid;
     gap: 1em;
 }
 
-.default-project, .project-element, .project-btn {
+.project-btn {
     width: 75%;
     font-size: 1em;
+}
+
+button {
+    border: 2px solid black;
+    background-color: white;
 }
 
 .projects {
@@ -144,10 +341,37 @@ body {
     align-items: center;
 }
 
+.delProj {
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-column: 1 / -1;
+    width: 100%;
+    align-items: center;
+}
+
+.delProj div {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    color: white;
+}
+
+.yes, .no {
+    grid-row: 2;
+}
+
+.no {
+    grid-column: 2;
+}
+
 
 .btn-div {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    width: 90%;
+    padding: 2%;
+    background-color: gray;
+
+
 }
 
 .edit, .delete {
@@ -194,6 +418,10 @@ button {
 
 .element-title button {
     margin: 1em;
+}
+
+.todoForm-title {
+    color: white;
 }
 
 @media screen and (max-width: 700px) {
