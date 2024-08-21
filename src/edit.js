@@ -57,7 +57,8 @@ export const formProject = (projectId) => {
 
     post.addEventListener("click", (event) => {
         if (newTitle.value === "") {
-            alert("Title required.")
+            alert("Title required.");
+            event.preventDefault();
         } else {
             const newProject = document.querySelector(".create-project");
             const projectElement = document.querySelector(".project-page");
